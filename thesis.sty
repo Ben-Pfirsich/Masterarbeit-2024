@@ -1,0 +1,212 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{thesis}[30/09/2021, v1.0]
+
+% Kodierung
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+%\PassOptionsToPackage{table}{xcolor}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+% Mathe
+\usepackage{amsmath, amsfonts, mathtools}
+
+% Deutsche Silbentrennung, Sonderzeichen und Anführungszeichen
+\usepackage[ngerman]{babel}
+\usepackage[german]{csquotes}
+
+\usepackage{enumitem}
+
+% TODO: soll das geometry Paket statt der Funktionalitäten der KOMA-Script Klassen verwendet werden, kann dies hier importiert werden; dies würde eventuell erlauben zwei unterschiedliche Versionen zu erstellen, einmal mit Bindungskorrektur (zum Binden) und einmal ohne (zum Lesen in der PDF); mit welchen Parametern ungefähr die gleichen Resultate wie mit den Mechanismen aus KOMA-Script erzielt werden können, kann ich nicht sagen
+%\usepackage[...]{geometry}
+
+% keine Seitenränder und 1.5 facher Zeilenabstand
+\setlength{\marginparsep}{0pt}
+\setlength{\marginparwidth}{0pt}
+\usepackage[onehalfspacing, nodisplayskipstretch]{setspace}
+
+% verbesserte Typographie auf Buchstabenebene
+% TODO: wenn dies nicht gewünscht ist, kann die folgende Zeile einfach entfernt werden; optisch ist es mMn. ansprechender und kann für weniger "overfull hbox" und "underfull vbox" Probleme sorgen
+\usepackage[tracking, kerning, spacing, babel]{microtype} % nutze alle Features mit Standardeinstellungen, auf Deutsch abgestimmt
+
+% Grafiken
+\usepackage{graphicx}
+\graphicspath{{images/}}
+% TODO: benötigt inkscape im Pfad und PdfLaTeX muss mit --shell-escape verwendet werden (siehe auch Dokumentation unter https://www.ctan.org/pkg/svg)
+%       alternativ kann die svg händisch in eine PDF exportiert werden und mit \includegraphics eingebunden werden
+\usepackage{svg}
+\svgsetup{inkscapelatex=false}
+% Tabellen
+\usepackage{booktabs}
+\usepackage{threeparttable} % TODO: nur notwendig wenn "Fußnote" in Tabelle eingefügt werden soll (siehe Beispieltabelle)
+\usepackage{multirow} % TODO: kann entfernt werden, falls nicht explizit per \multirow genutzt
+% Format für eine ganze Zeile verändern können (siehe Beispieltabelle)
+\usepackage{array}
+\newcolumntype{^}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{+}{>{\currentrowstyle}}
+\newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
+#1\ignorespaces%
+}
+
+% Bild- und Tabellenunterschriften
+\usepackage[
+    format=plain, % grundlegendes Format
+    labelfont=bf % fettgedrucktes Label
+]{caption}
+
+% Header und Footer
+\usepackage[headsepline, automark]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\clearpairofpagestyles % alle Kopf- und Fußzeilenfelder bereinigen
+\ohead{\headmark} % running header auf äußerer Seite
+\ofoot*{\pagemark} % Seitenzahl auf äußerer Fußzeile; durch * auch für pagestyle plain
+
+% SI-Einheiten
+% TODO: bei Nutzung weniger Einheiten nicht zwingend notwendig, kann aber den Umgang mit Einheiten und Zahlen allgemein vereinfachen bzw. für konsistente Ergebnisse sorgen
+\usepackage[locale=DE]{siunitx}
+\DeclareSIUnit\litre{l} % l statt L für Liter
+
+
+\definecolor{axablue}{HTML}{00008F}
+% Erzeugung PDF-Dokument und Hyperlinks
+\usepackage[
+    pdftitle={\titleDocument},
+    pdfauthor={\authorDocument},
+    pdfsubject={\subjectDocument},
+    pdflang={de-DE},
+    hidelinks, % Links nicht einrahmen
+% TODO: die restlichen Konfigurationen sind persönlicher Geschmack und abhängig vom Dokumentlayout (einseitig vs. zweiseitig etc.)
+    pdfdisplaydoctitle, % Titel statt Dokumentname in Titelleiste
+    pdfduplex=DuplexFlipLongEdge, % beidseitig drucken mit Spiegelung an langer Kante
+    pdfpagelayout=TwoColumnRight, % Bildlauf in Zweiseitenansicht mit Titelblatt rechts
+% Auswahl:black, blue, brown, cyan, darkgray, gray, green, lightgray, lime, magenta, olive, orange, pink, purple, red, teal, violet, white, yellow
+    colorlinks=true,
+    linkcolor=axablue,
+    anchorcolor=black,
+    citecolor=violet,
+    filecolor=cyan,
+    menucolor=red,
+    runcolor=cyan,
+    urlcolor=violet,
+    breaklinks=true
+]{hyperref}
+
+\usepackage[all]{hypcap}
+% "Abschnitt" statt "Unterabschnitt" für autoref auf eine subsection
+
+
+% TODO: dies ist persönlicher Geschmack
+\addto\extrasngerman{\def\subsectionautorefname{\sectionautorefname}}
+% Glossar
+% TODO: mit diesem Paket können automatisch Akronyme verwaltet und genutzt werden; hier wird explizit kein Abkürzungsverzeichnis erstellt und entsprechend auch keine Verweise auf dieses eingefügt; eventuell lohnt es sich hierfür das Paket glossaries-extra zu betrachten, das eine (noch) bessere Unterstützung von Akronymen und Abkürzungen verspricht (habe ich nicht getestet)
+\usepackage[acronym]{glossaries}
+\usepackage{listings}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{blue!10},
+    commentstyle=\color{blue!50},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{gray!30},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    emph={
+        FROM,EXPOSE, COPY, CMD, apiVersion, kind, metadata, name, labels, app, spec, replicas, selector, matchLabels, template, containers, image, ports, containerPort, pipeline, agent, stages, stage, steps, script, description, default, taskRef, params, value, tasks, runAfter
+    },
+    emphstyle={\color{magenta}}
+}
+
+\lstset{style=mystyle}
+
+\lstdefinestyle{docker}{
+    backgroundcolor=\color{blue!10},
+    commentstyle=\color{blue!50},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{gray!30},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    emph={
+        FROM,EXPOSE, COPY, CMD
+    },
+    emphstyle={\color{magenta}}
+}
+
+% Literatur
+\usepackage[backend=biber, style=numeric-comp, sorting=none, maxbibnames=100, maxcitenames=1, giveninits=true]{biblatex}
+\addbibresource{references.bib} % Dokument mit Quellen
+% TODO: weitere bib-Dateien können mit \addbibresource hinzugefügt werden, wobei bei Einträgen mit gleichem Key der Eintrag aus der ersten Datei genutzt wird
+\DefineBibliographyStrings{ngerman}{
+    andothers = {et\addabbrvspace al\adddot} % et al. statt u. a.
+}
+\setcounter{biburlnumpenalty}{9000} % Zeilenumbrüche nach Zahlen in URLs erlauben
+\setcounter{biburlucpenalty}{9000} % Zeilenumbrüche nach Großbuchstaben in URLs erlauben
+\setcounter{biburllcpenalty}{9000} % Zeilenumbrüche nach Kleinbuchstaben in URLs erlauben
+% Konfiguration der im Literaturverzeichnis verwendeten Felder
+\DeclareSourcemap{
+    \maps[datatype=bibtex]{
+    % immer ungenutzte Felder entfernen
+        \map{
+            \step[fieldset=abstract, null]
+            \step[fieldset=editor, null] % nur author, journal und publisher
+            \step[fieldset=isbn, null]
+            \step[fieldset=month, null] % year ist ausreichend
+            \step[fieldset=number, null] % volume ist ausreichend
+            \step[fieldset=pagetotal, null]
+        }
+        % wenn DOI vorhanden ist, nutze URL und eprint nicht
+        \map{
+            \step[fieldsource=doi, final]
+            \step[fieldset=eprint, null]
+            \step[fieldset=url, null]
+            \step[fieldset=urldate, null]
+        }
+        % wenn DOI nicht vorhanden ist, aber eprint schon, nutze URL ebenfalls nicht
+        \map{
+            \step[notfield=doi, final]
+            \step[fieldsource=eprint, final]
+            \step[fieldset=url, null]
+            \step[fieldset=urldate, null]
+        } % ist weder DOI noch eprint vorhanden, wird URL genutzt
+        % überflüssige Einträge für Konferenzpaper entfernen
+        \map{
+            \pertype{inproceedings}
+            \step[fieldset=venue, null]
+            \step[fieldset=eventdate, null]
+            \step[fieldset=eventtitle, null]
+        }
+        % überflüssige Einträge für Bücher entfernen
+        \map{
+            \pertype{book}
+            \step[fieldset=url, null]
+        }
+    }
+}
+
+% berechne DIV neu mit DIV=last; dies könnte durch zuvor importierte Pakete notwendig sein
+% TODO: bei Nutzung des geometry Pakets kann dies vermutlich entfernt werden
+\recalctypearea
+
+% allgemeine Kommandos
+\newcommand{\zB}{z.\,B.} % Abkürzung von "zum Beispiel"
+\newcommand{\ie}{d.\,h.} % Abkürzung von "das heißt" (\dh ist bereits belegt)
+\newcommand{\ua}{u.\,a.} % Abkürzung von "unter anderem"
+\newcommand{\bzw}{bzw.}

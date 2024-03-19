@@ -1,0 +1,113 @@
+% =====================================
+% Dies ist eine LaTeX-Vorlage für Masterarbeiten und vergleichbare Abschlussarbeiten bei Professor Bialonski.
+% Die Vorlage ist aus einer bei Professor Bialonski durchgeführten Masterarbeit hervorgegangen.
+% 
+% Die Vorlage enthält einige Beispielinhalte, -tabellen und -abbildungen, an denen die Nutzung der verschiedenen Pakete und allgemeine LaTeX-Kommandos zur Ausarbeitung einer Abschlussarbeit zu sehen sind.
+% Diese erheben weder einen Anspruch auf Vollständigkeit noch darauf immer den aktuell als Best Practice angesehenen Standards zu folgen.
+% 
+% Stellen, an denen Entscheidungen über Konfigurationen, verwendete Pakete etc. getroffen werden müssen sind mit einem TODO gekennzeichnet.
+% =====================================
+
+% =====================================
+% Tipps:
+%   für die Nutzung mit einem Versionsverwaltungssystem sollte mindestens mit jedem neuen Satz eine neue Zeile angefangen werden
+%   bei der Nutzung des Babel-Pakets mit ngerman kann mit "= ein Bindestrich eingefügt werden, der es LaTeX erlaubt auch an anderen Stellen als dem Bindestrich einen Zeilenumbruch einzufügen, und mit "~ ein geschützter Bindestrich eingefügt werden, d.h. dieser darf nicht als Zeilenumbruch verwendet werden
+%   bei der Verwendung z.B. von TeXstudio kann das LanguageTool eingebunden werden, siehe dazu auch https://paulomarconi.github.io/blog/LanguageTool%2BTeXstudio%2BVSCode/ und https://dev.languagetool.org/http-server
+%   viele hilfreiche Tipps findet man hier: https://www.semipol.de/posts/2018/06/latex-best-practices-lessons-learned-from-writing-a-phd-thesis/
+% =====================================
+
+
+% Dokumentklasse
+% TODO: Dies sind die wichtigsten Einstellungen, die vor Beginn des Schreibprozesses auf jeden Fall festgelegt werden sollten!
+%       ich habe die KOMA-Script Abwandlung der report Klasse genutzt und kann dies auch im Nachhinein empfehlen
+%       für allgemeine Informationen und Best Practices bezüglich der Auswahl der Schriftgröße und darauf basierend der Seitenränder empfiehlt es sich das Kapitel 2 der KOMA-Script Dokumentation (https://www.ctan.org/pkg/koma-script) zumindest zum Teil durchzulesen
+%       ich finde den zweiseitigen Modus angebracht, dies kann allerdings auch zu weiteren Fragen bezüglich der Seitenränder etc. führen; wird der einseitige Modus genutzt, können eventuell die diversen \cleardoubleoddpage Befehle entfernt werden
+%       die Bindungskorrektur wird von KOMA-Script dazu genutzt, den Verlust von Papier bei der Bindung in die Wahl der Seitenränder einzubeziehen, 10-12mm sind hier angebracht; für die reine Betrachtung als PDF wäre eigentlich eine Bindungskorrektur von 0 korrekt, dies würde allerdings zwei unterschiedliche Versionen mit ganz anderen Seitenrändern erfordern, von einer solchen Unterscheidung würde ich also abraten
+%       DIV ist der Mechanismus der KOMA-Script Klassen für die Bestimmung der Breite der Seitenränder; ein guter Wert kann über "DIV=calc" berechnet werden und aus der log-Datei ausgelesen werden, anschließend kann man davon ausgehend leichte Änderungen vornehmen; für eine Schriftgröße von 12pt und einer Bindungskorrektur von 12mm ist 10 ein guter Wert; alternativ kann das geometry Paket verwendet werden, siehe dazu auch diverse weitere TODOs
+\documentclass[
+    12pt, % Schriftgröße
+    twoside, % zweiseitiger Modus
+    ngerman, % deutsches Dokument
+    BCOR=12mm, % Bindungskorrektur
+    DIV=10, % Division (Anzahl Spalten/Zeilen pro Seite, bestimmt implizit Margins)
+    bibliography=toc, % Literatur zu Inhaltsverzeichnis hinzufügen
+    openright
+]{scrreprt}
+%\usepackage{minted}
+
+% Variablen bezüglich des Titels, Autors und Subjects
+\newcommand{\titleDocument}{DPO, RLHF, Leichte Sprache}
+\newcommand{\authorDocument}{Ben Pietsch}
+\newcommand{\subjectDocument}{Masterarbeit}
+\newcommand{\locationDocument}{Köln}
+\newcommand{\dateDocument}{\today} % Alternativ z.B. 30.~September 2021
+
+% grundsätzliche Informationen zum Dokument
+\title{\titleDocument}
+\author{\authorDocument}
+\date{\dateDocument}
+
+% Packete etc.
+\usepackage{thesis}
+
+\usepackage{lipsum}
+\usepackage{textcomp}
+\usepackage{wasysym} % TODO: nur für Beispieltext in summary.tex genutzt, wird nicht benötigt
+
+%\usepackage[cache=false,outputdir=out]{minted}
+
+% Besondere Trennungen (z.B. bei vereinzelter Nutzung englischer Begriffe ohne Nutzung des multilingualen Supports von babel)
+\hyphenation{Kon-fi-denz Kon-fi-denz-wert Mus-kel-ak-ti-vi-tät O-pen-Shift Platt-form-en}
+
+\makeglossaries
+\input{glossary}
+
+\begin{document}
+    % ============ Anfang =============
+    % Titelseite
+    \pagenumbering{roman}
+    \include{title}
+    \cleardoublepage
+
+    % Eidesstattliche Erklärung und Abstrakt
+    \begingroup
+
+    % keine Seitenzahl und kein running header
+        \thispagestyle{empty}
+        \renewcommand*{\chapterpagestyle}{empty}
+
+
+        \cleardoubleoddpage % Eidesstattliche Erklärung rechts, damit Unterschrift nicht durchdrückt
+        \include{affidavit}
+
+        \cleardoubleoddpage % Abstrakt rechts
+%        \pagestyle{emtpy}
+        \include{abstract}
+
+        \glsresetall % alle bereits genutzten Akronyme wieder zurücksetzen
+    \endgroup
+
+    % Inhaltsverzeichnis
+    \cleardoubleoddpage % Inhaltsverzeichnis rechts
+    \begingroup
+        \hypersetup{hidelinks}
+        \pagestyle{empty}
+        \tableofcontents
+        \addtocontents{toc}{\protect\thispagestyle{empty}}
+        \listoffigures
+        \thispagestyle{empty}
+    \endgroup
+    % =========== Hauptteil ===========
+    \cleardoubleoddpage % Beginn Einleitung rechts
+    \pagenumbering{arabic}
+    \include{Einleitung}
+
+    % ============= Ende ==============
+%    \printglossary[title={Glossar und Akronyme}]
+    \printglossary[type=\acronymtype]
+
+    \printglossary
+
+    \cleardoubleoddpage % Literaturverzeichnis rechts
+    \printbibliography
+\end{document}
