@@ -1,0 +1,38 @@
+
+Einleitung
+    Einfache Sprache
+    Leichte Sprache
+        Zielgruppe
+
+
+Überblick über verwendete Technologien
+    (Transformers)
+    Decoder-Only Modelle
+        GPT
+        LLAMA 2
+        Leo
+    Supervised-Finetuning (SFT)
+    Alignment Methods
+        Was ist das?
+        DPO
+        (RLHF, PPO)
+
+Experimente
+    Datensätze
+    SFT
+    Annotationen
+        Vorgehen
+    DPO
+    Evaluation
+    Ergebnisse
+
+
+
+Thema:
+
+Optimization of german text simplification models with supervised fine-tuning and alignment methods
+
+(Leichte sprache)
+
+
+Optimierung eines Models zur Textvereinfachung durch SFT und Alignment-Methoden

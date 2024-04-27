@@ -1,0 +1,7 @@
+Survey RL: https://link.springer.com/article/10.1007/s10462-022-10205-5
+Survey RLHF: https://arxiv.org/abs/2312.14925
+
+Llama Finetuning mit RLHF: https://arxiv.org/abs/2307.09288
+How to Sample Dataset, RSO: https://arxiv.org/html/2309.06657v2
+
+

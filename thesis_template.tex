@@ -36,10 +36,10 @@
 %\usepackage{minted}
 
 % Variablen bezüglich des Titels, Autors und Subjects
-\newcommand{\titleDocument}{DPO, RLHF, Leichte Sprache}
+\newcommand{\titleDocument}{Optimization of german text simplification models with supervised fine-tuning and alignment methods}
 \newcommand{\authorDocument}{Ben Pietsch}
 \newcommand{\subjectDocument}{Masterarbeit}
-\newcommand{\locationDocument}{Köln}
+\newcommand{\locationDocument}{Jülich}
 \newcommand{\dateDocument}{\today} % Alternativ z.B. 30.~September 2021
 
 % grundsätzliche Informationen zum Dokument
@@ -66,7 +66,7 @@
     % ============ Anfang =============
     % Titelseite
     \pagenumbering{roman}
-    \include{title}
+    \include{chapters/title}
     \cleardoublepage
 
     % Eidesstattliche Erklärung und Abstrakt
@@ -78,11 +78,11 @@
 
 
         \cleardoubleoddpage % Eidesstattliche Erklärung rechts, damit Unterschrift nicht durchdrückt
-        \include{affidavit}
+        \include{chapters/affidavit}
 
         \cleardoubleoddpage % Abstrakt rechts
 %        \pagestyle{emtpy}
-        \include{abstract}
+        \include{chapters/abstract}
 
         \glsresetall % alle bereits genutzten Akronyme wieder zurücksetzen
     \endgroup
@@ -100,7 +100,7 @@
     % =========== Hauptteil ===========
     \cleardoubleoddpage % Beginn Einleitung rechts
     \pagenumbering{arabic}
-    \include{Einleitung}
+    \include{chapters/Einleitung}
 
     % ============= Ende ==============
 %    \printglossary[title={Glossar und Akronyme}]
