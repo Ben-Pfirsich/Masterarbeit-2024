@@ -69,6 +69,15 @@
 
 
 \definecolor{axablue}{HTML}{00008F}
+\definecolor{ppgreen}{HTML}{1B5337}
+\definecolor{goodgreen}{HTML}{63A537}
+\definecolor{badred}{HTML}{BC0000}
+
+\usepackage{tcolorbox}
+\newtcolorbox{mybox}[1]
+{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
+
+
 % Erzeugung PDF-Dokument und Hyperlinks
 \usepackage[
     pdftitle={\titleDocument},
@@ -84,11 +93,11 @@
     colorlinks=true,
     linkcolor=axablue,
     anchorcolor=black,
-    citecolor=violet,
+    citecolor=goodgreen!140,
     filecolor=cyan,
     menucolor=red,
     runcolor=cyan,
-    urlcolor=violet,
+    urlcolor=axablue,
     breaklinks=true
 ]{hyperref}
 
@@ -101,6 +110,7 @@
 % Glossar
 % TODO: mit diesem Paket können automatisch Akronyme verwaltet und genutzt werden; hier wird explizit kein Abkürzungsverzeichnis erstellt und entsprechend auch keine Verweise auf dieses eingefügt; eventuell lohnt es sich hierfür das Paket glossaries-extra zu betrachten, das eine (noch) bessere Unterstützung von Akronymen und Abkürzungen verspricht (habe ich nicht getestet)
 \usepackage[acronym]{glossaries}
+
 \usepackage{listings}
 \lstdefinestyle{mystyle}{
     backgroundcolor=\color{blue!10},
@@ -126,29 +136,6 @@
 }
 
 \lstset{style=mystyle}
-
-\lstdefinestyle{docker}{
-    backgroundcolor=\color{blue!10},
-    commentstyle=\color{blue!50},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{gray!30},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    keepspaces=true,
-    numbers=left,
-    numbersep=5pt,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    tabsize=2,
-    emph={
-        FROM,EXPOSE, COPY, CMD
-    },
-    emphstyle={\color{magenta}}
-}
 
 % Literatur
 \usepackage[backend=biber, style=authoryear-comp, sorting=none, maxbibnames=100, maxcitenames=1, giveninits=true]{biblatex}
