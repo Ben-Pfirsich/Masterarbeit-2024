@@ -65,7 +65,7 @@ Once a word was introduced to describe a subject, that word should be used again
             \end{minipage}
         }
     \end{center}
-    \caption[]{}
+    \caption[Using the same word to refer to the same subject.]{Using the same word to refer to the same subject (bottom). Using synonyms can be confusing (top).}
     \label{fig:subject_ref}
 \end{figure}
 Shorter words are preferred over longer words.
@@ -235,7 +235,6 @@ Writers of \gls{pl} are supposed to factor in the audience of the text and make 
 %
 %    rulebooks published by Duden
 
-%"making expert communication accessible needs much effort" -> automation
 
 %
 
@@ -243,14 +242,45 @@ Writers of \gls{pl} are supposed to factor in the audience of the text and make 
 %"Easy language is roughly equivalent with level A2 of the Common European Framework of Reference for Languages (CEFR)"
 
 
-\section{ Simplification in Natural Language Processing}\label{sec:langSimp}
+\section{Automatic Language Simplification}\label{sec:langSimp}
 
+Writing texts in \gls{pl} or \gls{el} and translating complex texts into simpler forms requires much effort~\autocite{easyLanguageBook}.
+Hence, there is a demand for tools that can assist in this process.
+In the context of \gls{nlp} the task of computer aided reduction of text complexity is known as \gls{ats}~\autocite{Ansch_tz_2023}.
+\gls{ats} is similar to other \gls{nlp}-tasks like summarization~\autocite{rios-etal-2021-new} and language translation~\autocite{aumiller2022klexikon}.
+It is a sequence-to-sequence (seq2seq) task~\autocite{Ansch_tz_2023}.
+% meaning the input and output spaces consist of sequences of varying length
+The goal of \gls{ats} is to create a system that takes a text in standard or expert language as an input and outputs a simplified version of that text.
+
+\gls{ats} is a relatively new machine translation task~\autocite{schomacker2023data}.
+Especially simplification of German text has not seen a lot of research~\autocite{Ansch_tz_2023}.
+
+
+
+%"making expert communication accessible needs much effort" -> automation
+
+early rule-based approach to language simplification~\autocite{suter2016}
+From~\autocite{klöser2024german}:
+
+
+From~\autocite{Ansch_tz_2023}:
+
+From~\autocite{aumiller2022klexikon}:
+
+From~\autocite{toborek2023new}:
+
+From~\autocite{sauberli-etal-2020-benchmarking}
+
+From~\autocite{battisti-etal-2020-corpus}
+
+From~\autocite{madina2023easytoread}
 
 From~\autocite{schomacker2023data}:
 text simplification with machine learning is still very new compared to other translation tasks
 
+From~\autocite{rios-etal-2021-new}: 20min Dataset
 
-early rule-based approach to language simplification~\autocite{suter2016}
+
 
 
 
