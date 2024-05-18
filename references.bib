@@ -3,7 +3,7 @@
     url = {https://www.python.org/},
     urldate = {2022-07-23},
 }
-    
+
 @misc{selbsterstellt,
     author = {Ben Pietsch},
     title = {Selbst erstellte Grafik},
@@ -11,20 +11,20 @@
 }
 
 @misc{klöser2024german,
-    title={German Text Simplification: Finetuning Large Language Models with Semi-Synthetic Data},
-    author={Lars Klöser and Mika Beele and Jan-Niklas Schagen and Bodo Kraft},
-    year={2024},
-    eprint={2402.10675},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
+    title = {German Text Simplification: Finetuning Large Language Models with Semi-Synthetic Data},
+    author = {Lars Klöser and Mika Beele and Jan-Niklas Schagen and Bodo Kraft},
+    year = {2024},
+    eprint = {2402.10675},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.CL}
 }
 
 
 @inproceedings{sauberli-etal-2020-benchmarking,
     title = "Benchmarking Data-driven Automatic Text Simplification for {G}erman",
-    author = {S{\"a}uberli, Andreas  and
-      Ebling, Sarah  and
-      Volk, Martin},
+    author = {S{\"a}uberli, Andreas and
+ Ebling, Sarah and
+ Volk, Martin},
     editor = "Gala, N{\'u}ria  and
       Wilkens, Rodrigo",
     booktitle = "Proceedings of the 1st Workshop on Tools and Resources to Empower People with REAding DIfficulties (READI)",
@@ -40,11 +40,11 @@
 
 @inproceedings{battisti-etal-2020-corpus,
     title = "A Corpus for Automatic Readability Assessment and Text Simplification of {G}erman",
-    author = {Battisti, Alessia  and
-      Pf{\"u}tze, Dominik  and
-      S{\"a}uberli, Andreas  and
-      Kostrzewa, Marek  and
-      Ebling, Sarah},
+    author = {Battisti, Alessia and
+ Pf{\"u}tze, Dominik and
+ S{\"a}uberli, Andreas and
+ Kostrzewa, Marek and
+ Ebling, Sarah},
     editor = "Calzolari, Nicoletta  and
       B{\'e}chet, Fr{\'e}d{\'e}ric  and
       Blache, Philippe  and
@@ -72,13 +72,13 @@
 
 @inproceedings{rios-etal-2021-new,
     title = "A New Dataset and Efficient Baselines for Document-level Text Simplification in {G}erman",
-    author = {Rios, Annette  and
-      Spring, Nicolas  and
-      Kew, Tannon  and
-      Kostrzewa, Marek  and
-      S{\"a}uberli, Andreas  and
-      M{\"u}ller, Mathias  and
-      Ebling, Sarah},
+    author = {Rios, Annette and
+ Spring, Nicolas and
+ Kew, Tannon and
+ Kostrzewa, Marek and
+ S{\"a}uberli, Andreas and
+ M{\"u}ller, Mathias and
+ Ebling, Sarah},
     editor = "Carenini, Giuseppe  and
       Cheung, Jackie Chi Kit  and
       Dong, Yue  and
@@ -94,44 +94,80 @@
     pages = "152--161",
 }
 
+@inproceedings{spring-etal-2021-exploring,
+    title = "Exploring {G}erman Multi-Level Text Simplification",
+    author = "Spring, Nicolas  and
+      Rios, Annette  and
+      Ebling, Sarah",
+    editor = "Mitkov, Ruslan  and
+      Angelova, Galia",
+    booktitle = "Proceedings of the International Conference on Recent Advances in Natural Language Processing (RANLP 2021)",
+    month = sep,
+    year = "2021",
+    address = "Held Online",
+    publisher = "INCOMA Ltd.",
+    url = "https://aclanthology.org/2021.ranlp-1.150",
+    pages = "1339--1349",
+    abstract = "We report on experiments in automatic text simplification (ATS) for German with multiple simplification levels along the Common European Framework of Reference for Languages (CEFR), simplifying standard German into levels A1, A2 and B1. For that purpose, we investigate the use of source labels and pretraining on standard German, allowing us to simplify standard language to a specific CEFR level. We show that these approaches are especially effective in low-resource scenarios, where we are able to outperform a standard transformer baseline. Moreover, we introduce copy labels, which we show can help the model make a distinction between sentences that require further modifications and sentences that can be copied as-is.",
+}
+
+@inproceedings{salar-mohtaj-babak-naderi-2022-overview,
+    title = "Overview of the {G}erm{E}val 2022 Shared Task on Text Complexity Assessment of {G}erman Text",
+    author = {Mohtaj, Salar and
+ Naderi, Babak and
+ M{\"o}ller, Sebastian},
+    editor = {M{\"o}ller, Sebastian and
+ Mohtaj, Salar and
+ Naderi, Babak},
+    booktitle = "Proceedings of the GermEval 2022 Workshop on Text Complexity Assessment of German Text",
+    month = sep,
+    year = "2022",
+    address = "Potsdam, Germany",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.germeval-1.1",
+    pages = "1--9",
+    abstract = "In this paper we present the GermEval 2022 shared task on Text Complexity Assessment of German text. Text forms an integral part of exchanging information and interacting with the world, correlating with quality and experience of life. Text complexity is one of the factors which affects a reader{'}s understanding of a text. The mapping of a body of text to a mathematical unit quantifying the degree of readability is the basis of complexity assessment. As readability might be influenced by representation, we only target the text complexity for readers in this task. We designed the task as text regression in which participants developed models to predict complexity of pieces of text for a German learner in a range from 1 to 7. The shared task is organized in two phases; the development and the test phases. Among 24 participants who registered for the shared task, ten teams submitted their results on the test data.",
+}
+
 @inproceedings{Ansch_tz_2023,
-    title={Language Models for German Text Simplification: Overcoming Parallel Data Scarcity through Style-specific Pre-training},
-    url={http://dx.doi.org/10.18653/v1/2023.findings-acl.74},
-    DOI={10.18653/v1/2023.findings-acl.74},
-    booktitle={Findings of the Association for Computational Linguistics: ACL 2023},
-    publisher={Association for Computational Linguistics},
-    author={Anschütz, Miriam and Oehms, Joshua and Wimmer, Thomas and Jezierski, Bartłomiej and Groh, Georg},
-    year={2023} }
+    title = {Language Models for German Text Simplification: Overcoming Parallel Data Scarcity through Style-specific Pre-training},
+    url = {http://dx.doi.org/10.18653/v1/2023.findings-acl.74},
+    DOI = {10.18653/v1/2023.findings-acl.74},
+    booktitle = {Findings of the Association for Computational Linguistics: ACL 2023},
+    publisher = {Association for Computational Linguistics},
+    author = {Anschütz, Miriam and Oehms, Joshua and Wimmer, Thomas and Jezierski, Bartłomiej and Groh, Georg},
+    year = {2023} }
 
 @misc{aumiller2022klexikon,
-    title={Klexikon: A German Dataset for Joint Summarization and Simplification},
-    author={Dennis Aumiller and Michael Gertz},
-    year={2022},
-    eprint={2201.07198},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
+    title = {Klexikon: A German Dataset for Joint Summarization and Simplification},
+    author = {Dennis Aumiller and Michael Gertz},
+    year = {2022},
+    eprint = {2201.07198},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.CL}
 }
 
 @misc{toborek2023new,
-    title={A New Aligned Simple German Corpus},
-    author={Vanessa Toborek and Moritz Busch and Malte Boßert and Christian Bauckhage and Pascal Welke},
-    year={2023},
-    eprint={2209.01106},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
+    title = {A New Aligned Simple German Corpus},
+    author = {Vanessa Toborek and Moritz Busch and Malte Boßert and Christian Bauckhage and Pascal Welke},
+    year = {2023},
+    eprint = {2209.01106},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.CL}
 }
 
 @misc{schomacker2023data,
-    title={Data and Approaches for German Text simplification -- towards an Accessibility-enhanced Communication},
-    author={Thorben Schomacker and Michael Gille and Jörg von der Hülls and Marina Tropmann-Frick},
-    year={2023},
-    eprint={2312.09966},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
+    title = {Data and Approaches for German Text simplification -- towards an Accessibility-enhanced Communication},
+    author = {Thorben Schomacker and Michael Gille and Jörg von der Hülls and Marina Tropmann-Frick},
+    year = {2023},
+    eprint = {2312.09966},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.CL}
 }
 
 
 https://library.oapen.org/handle/20.500.12657/42089
+
 @book{easyLanguageBook,
     author = {Christiane Maaß},
     title = {Easy Language – Plain Language – Easy Language Plus},
@@ -207,19 +243,75 @@ https://library.oapen.org/handle/20.500.12657/42089
 }
 
 @misc{madina2023easytoread,
-    title={Easy-to-Read in Germany: A Survey on its Current State and Available Resources},
-    author={Margot Madina and Itziar Gonzalez-Dios and Melanie Siegel},
-    year={2023},
-    eprint={2306.03189},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
+    title = {Easy-to-Read in Germany: A Survey on its Current State and Available Resources},
+    author = {Margot Madina and Itziar Gonzalez-Dios and Melanie Siegel},
+    year = {2023},
+    eprint = {2306.03189},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.CL}
 }
 
 @misc{otter2019survey,
-    title={A Survey of the Usages of Deep Learning in Natural Language Processing},
-    author={Daniel W. Otter and Julian R. Medina and Jugal K. Kalita},
-    year={2019},
-    eprint={1807.10854},
+    title = {A Survey of the Usages of Deep Learning in Natural Language Processing},
+    author = {Daniel W. Otter and Julian R. Medina and Jugal K. Kalita},
+    year = {2019},
+    eprint = {1807.10854},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.CL}
+}
+
+@article{naderi2019subjective,
+    title = {Subjective Assessment of Text Complexity: A Dataset for German Language},
+    author = {Naderi, Babak and Mohtaj, Salar and Ensikat, Kaspar and M{\"o}ller, Sebastian},
+    journal = {arXiv preprint arXiv:1904.07733},
+    year = {2019}
+}
+
+@INPROCEEDINGS{Garain2019,
+    author = {Garain, Avishek and Basu, Arpan and Dawn, Rudrajit and Naskar, Sudip Kumar},
+    booktitle = {2019 4th International Conference on Information Systems and Computer Networks (ISCON)},
+    title = {Sentence Simplification using Syntactic Parse trees},
+    year = {2019},
+    volume = {},
+    number = {},
+    pages = {672-676},
+    keywords = {Compounds;Syntactics;Games;Task analysis;Computer science;Natural language processing;Random access memory;Syntactic Parse tree;SBAR;BLEU;Anytree},
+    doi = {10.1109/ISCON47742.2019.9036207} }
+
+
+@inproceedings{klaper-etal-2013-building,
+    title = "Building a {G}erman/Simple {G}erman Parallel Corpus for Automatic Text Simplification",
+    author = "Klaper, David  and
+      Ebling, Sarah  and
+      Volk, Martin",
+    editor = "Williams, Sandra  and
+      Siddharthan, Advaith  and
+      Nenkova, Ani",
+    booktitle = "Proceedings of the Second Workshop on Predicting and Improving Text Readability for Target Reader Populations",
+    month = aug,
+    year = "2013",
+    address = "Sofia, Bulgaria",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/W13-2902",
+    pages = "11--19",
+}
+
+@ARTICLE{ebeling2022,
+    AUTHOR = {Ebling, Sarah and Battisti, Alessia and Kostrzewa, Marek and Pfütze, Dominik and Rios, Annette and Säuberli, Andreas and Spring, Nicolas},
+    TITLE = {Automatic Text Simplification for German},
+    JOURNAL = {Frontiers in Communication},
+    VOLUME = {7},
+    YEAR = {2022},
+    URL = {https://www.frontiersin.org/articles/10.3389/fcomm.2022.706718},
+    DOI = {10.3389/fcomm.2022.706718},
+    ISSN = {2297-900X},
+}
+
+@misc{deilen2023using,
+    title={Using ChatGPT as a CAT tool in Easy Language translation},
+    author={Silvana Deilen and Sergio Hernández Garrido and Ekaterina Lapshinova-Koltunski and Christiane Maaß},
+    year={2023},
+    eprint={2308.11563},
     archivePrefix={arXiv},
     primaryClass={cs.CL}
 }

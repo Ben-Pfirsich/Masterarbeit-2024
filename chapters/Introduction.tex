@@ -1,6 +1,6 @@
 \chapter{Introduction}\label{ch:introduction}
 
-In the digital age written text has become ubiquitous. % (TODO: cite?)
+In the digital age written text has become ubiquitous. % (TODO: cite?~\autocite{salar-mohtaj-babak-naderi-2022-overview})
 % TODO: Examples for important written text: Websites, Online Messages like E-Mails, Newspapers, Government Authorities (distribute Information)
 
 Today the ability to comprehend text is a necessary prerequisite to actively participate in society. % nowadays
@@ -168,7 +168,6 @@ Today \gls{el} can be found on many websites of government departments and munic
 
 
 \section{Plain Language}\label{sec:pl}
-% TODO: Überarbeiten, abschnitt ist seltsam
 \gls{pl} is a simplified language that is much closer to standard language.
 Originally, it was not intended for people with disabilities.
 \gls{pl} is often used to explain domain specific texts in expert language to less informed people.
@@ -256,20 +255,47 @@ The goal of \gls{ats} is to create a system that takes a text in standard or exp
 Especially simplification of German text has not seen a lot of research~\autocite{Ansch_tz_2023}.
 
 An early rule-based approach for language simplification was presented by~\autocite{suter2016}
+From~\autocite{Garain2019}: approach for english simplification with parse-trees
 
 In translation solutions based on Deep Learning are generally superior to rule-based methods.
 Though, they require vast amounts of Data.~\autocite{otter2019survey}
 
-From~\autocite{klöser2024german}:
+% TODO: What is monolingual/parallel data?
+% TODO: Deep Learning und Supervised Machine Learning
+% TODO: Document level vs Sentence Level
+
+From~\autocite{klaper-etal-2013-building}:
+build the first parallel corpus for german text simplification
+extended by ~\autocite{battisti-etal-2020-corpus}
+known as \enquote{Web-Corpus}~\autocite{ebeling2022}, needs to be requested
 
 
 From~\autocite{Ansch_tz_2023}:
+data for german language simplification is scarce
+pretraining causal language models improves ATS performance
+using monolingual Easy Language Data to fine-tune a GPT-like models
+-> decoder output in style of \gls{el}
+training ATS task on pretrained mBart model (replacing decoder with above-mentioned GPT-like Decoders, trainig cross-attention only)
+publish web scraper for different website with easy language
+
+From~\autocite{klöser2024german}:
+previous work
+using ChatGPT to generate standard language from monolingual \gls{el} and \gls{pl} to form synthetic parallel data
+show that rule-based evaluations for \gls{el} are limited
+evaluation of this seq2seq task is very difficult
 
 From~\autocite{aumiller2022klexikon}:
+German children’s encyclopedia \enquote{Klexikon} aligned with article from Wikipedia in standard language
+exploring the task of simultaneous simplification and summarization
+
 
 From~\autocite{toborek2023new}:
+automatic sentence alignment
+scrapers for different websites
 
 From~\autocite{sauberli-etal-2020-benchmarking}
+first neural simplification approach based on transformers (~\autocite{Ansch_tz_2023})
+"lack of fluency and content preservation"
 
 From~\autocite{battisti-etal-2020-corpus}
 
@@ -278,13 +304,20 @@ From~\autocite{madina2023easytoread}
 From~\autocite{schomacker2023data}:
 text simplification with machine learning is still very new compared to other translation tasks
 
-From~\autocite{rios-etal-2021-new}: 20min Dataset
+From~\autocite{rios-etal-2021-new}:
+20min Dataset (17 905 article pairs (parallel), plain language strongly summarized)
+mBART architecture for document level simplification
+
+From~\autocite{spring-etal-2021-exploring}
+system that can output different levels of simplified language based on Common European Framework of References for Languages (CEFR)(~\autocite{Ansch_tz_2023})
+controlling copying behaviour
+
+From~\autocite{salar-mohtaj-babak-naderi-2022-overview}:
 
 
+From~\autocite{naderi2019subjective}
+TextComplexityDE: 250 parallel sentences
 
-
-
-
-
-
-
+From~\autocite{deilen2023using}
+Using sota model ChatGPT-3.5 to prompt for translations into \gls{el}
+Outputs text that are easier to understand but leaving out information and not following the rules of \gls{el}
