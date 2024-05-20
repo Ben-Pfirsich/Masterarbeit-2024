@@ -284,22 +284,28 @@ using ChatGPT to generate standard language from monolingual \gls{el} and \gls{p
 show that rule-based evaluations for \gls{el} are limited
 evaluation of this seq2seq task is very difficult
 
+back-translation (~\autocite{sennrich-etal-2016-improving})
+
 From~\autocite{aumiller2022klexikon}:
 German children’s encyclopedia \enquote{Klexikon} aligned with article from Wikipedia in standard language
 exploring the task of simultaneous simplification and summarization
 
 
 From~\autocite{toborek2023new}:
-automatic sentence alignment
 scrapers for different websites
+automatic sentence alignment of parallel documents
+corpus of 708 aligned documents
 
 From~\autocite{sauberli-etal-2020-benchmarking}
 first neural simplification approach based on transformers (~\autocite{Ansch_tz_2023})
 "lack of fluency and content preservation"
+parallel Austria Presse Agentur (APA) corpus (simplification into levels B1 and A2 (not strictly \gls{el}))
+Training transformer models for sentence level simplification
+
 
 From~\autocite{battisti-etal-2020-corpus}
-
-From~\autocite{madina2023easytoread}
+publish corpus with parallel and monolingual-only (simplified German) data (consisting of about 6,200 documents)
+back-translation (~\autocite{sennrich-etal-2016-improving})
 
 From~\autocite{schomacker2023data}:
 text simplification with machine learning is still very new compared to other translation tasks
@@ -309,10 +315,10 @@ From~\autocite{rios-etal-2021-new}:
 mBART architecture for document level simplification
 
 From~\autocite{spring-etal-2021-exploring}
-system that can output different levels of simplified language based on Common European Framework of References for Languages (CEFR)(~\autocite{Ansch_tz_2023})
+system that can output different levels of simplified language based on
+Common European Framework of References for Languages (CEFR)(~\autocite{Ansch_tz_2023})
 controlling copying behaviour
 
-From~\autocite{salar-mohtaj-babak-naderi-2022-overview}:
 
 
 From~\autocite{naderi2019subjective}
@@ -321,3 +327,11 @@ TextComplexityDE: 250 parallel sentences
 From~\autocite{deilen2023using}
 Using sota model ChatGPT-3.5 to prompt for translations into \gls{el}
 Outputs text that are easier to understand but leaving out information and not following the rules of \gls{el}
+
+%From~\autocite{madina2023easytoread} TODO: Survey
+%From~\autocite{salar-mohtaj-babak-naderi-2022-overview}: TextComplexity 2022
+
+% TODO: Evaluation
+
+BLEU: ~\autocite{papineni-etal-2002-bleu}
+SARI: ~\autocite{xu-etal-2016-optimizing}
