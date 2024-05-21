@@ -146,7 +146,7 @@ While \gls{el} has yet to find acceptance in the general population, it has alre
 In 2002 the \gls{bgg} was adopted.
 The \gls{bgg} guarantees equal living conditions to people regardless of disabilities.
 In 2018 the \gls{bgg} was extended to include clearer instructions for accessibility~\autocite{bggInfo}.
-Since then public authorities have to provide information in \gls{el} as specified in section 2, paragraph 11~\autocite{bgg2018}.
+Since then, public authorities have to provide information in \gls{el} as specified in section 2, paragraph 11~\autocite{bgg2018}.
 Today \gls{el} can be found on many websites of government departments and municipal institutions (e.g.\ the City Cologne: \url{https://www.stadt-koeln.de/artikel/07808/index.html}).
 
 \begin{figure}
@@ -239,30 +239,38 @@ Writers of \gls{pl} are supposed to factor in the audience of the text and make 
 
 %From~\autocite{schomacker2023data}:
 %"Easy language is roughly equivalent with level A2 of the Common European Framework of Reference for Languages (CEFR)"
-
+\\
 
 \section{Automatic Language Simplification}\label{sec:langSimp}
 
 Writing texts in \gls{pl} or \gls{el} and translating complex texts into simpler forms requires much effort~\autocite{easyLanguageBook}.
 Hence, there is a demand for tools that can assist in this process.
 In the context of \gls{nlp} the task of computer aided reduction of text complexity is known as \gls{ats}~\autocite{Ansch_tz_2023}.
-\gls{ats} is similar to other \gls{nlp}-tasks like summarization~\autocite{rios-etal-2021-new} and language translation~\autocite{aumiller2022klexikon}.
-It is a sequence-to-sequence (seq2seq) task~\autocite{Ansch_tz_2023}.
-% meaning the input and output spaces consist of sequences of varying length
 The goal of \gls{ats} is to create a system that takes a text in standard or expert language as an input and outputs a simplified version of that text.
-
-\gls{ats} is a relatively new machine translation task~\autocite{schomacker2023data}.
+\gls{ats} is similar to other \gls{nlp}-tasks like summarization~\autocite{rios-etal-2021-new} and language translation~\autocite{aumiller2022klexikon}.
+It is a \gls{seq2seq}-task~\autocite{Ansch_tz_2023} meaning the desired system has to processes and output texts of varying lengths.
+\gls{ats} is a relatively new \gls{nlp}-task~\autocite{schomacker2023data}.
 Especially simplification of German text has not seen a lot of research~\autocite{Ansch_tz_2023}.
 
-An early rule-based approach for language simplification was presented by~\autocite{suter2016}
-From~\autocite{Garain2019}: approach for english simplification with parse-trees
+Some \gls{ats}-methods focus only on sentence-level simplifications while other approaches aim to simplify whole documents.
+Simplifications on sentence-level have the advantage that the \gls{ats}-System has to perform less complex transformations on the text.
+But certain features of \gls{el} like the organization of content order and structure (see section~\ref{subsec:el-rules}) can not be taken into account. %TODO: Braucht das eine quelle oder ist das offensichtlich?
+Document-level simplifications do not have this problem.
+However, they require the \gls{ats}-system to be able to process longer sequences and to carry out very complex modifications.
 
-In translation solutions based on Deep Learning are generally superior to rule-based methods.
-Though, they require vast amounts of Data.~\autocite{otter2019survey}
+An early rule-based approach for language simplification into \gls{el} was presented by~\autocite{suter2016}.
+This approach employed dictionaries to substitute difficult symbols.
+Sentences and long words were split through a defined rule-set and additional explanations were added by inserting entries from the online dictionary \enquote{Hurraki}.
+~\autocite{Garain2019} created another rule-based method using parse-trees to simplify english sentences.
 
+Solutions based on Deep Learning are generally superior to rule-based methods for language translation tasks.
+However, they require vast amounts of Data~\autocite{otter2019survey}.
+Unfortunately data for german language simplification is scarce~\autocite{Ansch_tz_2023}.
+
+
+\section{Notes}\label{sec:notes}
 % TODO: What is monolingual/parallel data?
 % TODO: Deep Learning und Supervised Machine Learning
-% TODO: Document level vs Sentence Level
 
 From~\autocite{klaper-etal-2013-building}:
 build the first parallel corpus for german text simplification
