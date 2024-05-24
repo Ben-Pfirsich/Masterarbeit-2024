@@ -296,6 +296,26 @@ They train transformer-based language models on the published dataset while also
 Another transformer-based approach for \gls{ats} is presented by~\textcite{spring-etal-2021-exploring}.
 Their models are also trained on the corpora \enquote{Capito} and \enquote{APA} and can output different levels of simplified language based on the \gls{cefr}.
 
+\textcite{aumiller2022klexikon} align entries from the German children’s encyclopedia \enquote{Klexikon} with Wikipedia articles in standard language.
+This method explores the task of simultaneous simplification and summarization, as the Klexikon articles are usually much shorter than their Wikipedia counterparts.
+
+Current publicly available \gls{llm} are capable of completing a vast number of different tasks.
+\textcite{deilen2023using} test the feasibility of using ChatGPT-3.5 as an \gls{ats}-system.
+They try different prompt strategies to translate text into \gls{el}.
+But while outputs are easier to understand, they are missing information and do not follow the rules of \gls{el}.
+
+\textcite{toborek2023new} experiment with automatic sentence alignment of parallel documents.
+They publish corpus of 708 aligned documents by providing \gls{webscraper}s for different websites.
+
+To overcome the aforementioned scarcity of parallel data~\textcite{Ansch_tz_2023} use monolingual \gls{el}-data to pretrain \gls{causal-lm}s.
+The pretrained models output text in the style of \gls{el} and show improved capabilities in the \gls{ats}-downstream-task.
+They publish the \gls{webscraper}s that were used to gather the monolingual data\footnote{\url{https://github.com/brjezierski/scrapers}}.
+Running those scrapers yields more than 20,000 documents in either \gls{el} or \gls{pl}.
+%training ATS task on pretrained mBart model (replacing decoder with above-mentioned GPT-like Decoders, trainig cross-attention only)
+
+\textcite{stodden-etal-2023-deplain} address issues with current datasets for german \gls{ats} and provide a new parallel corpus that is more accessible than previous corpora.
+It is called \enquote{DEPlain} and contains about 1,000 parallel documents (either in \gls{el} or \gls{pl}) of which parts ca be downloaded directly from the internet\footnote{\url{https://github.com/rstodden/DEPlain/}}, scraped with a provided script\footnote{\url{https://github.com/rstodden/data_collection_german_simplification}} and be directly requested from the authors.
+The corpus contains documents from the Austria Presse Agentur (APA) so it might overlap with the APA Corpus.
 
 %\enquote{Deep Learning} is a subset of \enquote{Machine Learning}~\autocite{jagdaleDeepLearning2022}.
 
@@ -307,30 +327,8 @@ Their models are also trained on the corpora \enquote{Capito} and \enquote{APA} 
 From~\autocite{naderi2019subjective}
 TextComplexityDE: 250 parallel sentences
 
-From~\autocite{aumiller2022klexikon}:
-German children’s encyclopedia \enquote{Klexikon} aligned with article from Wikipedia in standard language
-exploring the task of simultaneous simplification and summarization
-
-From~\autocite{deilen2023using}
-Using sota model ChatGPT-3.5 to prompt for translations into \gls{el}
-Outputs text that are easier to understand but leaving out information and not following the rules of \gls{el}
-
-From~\autocite{toborek2023new}:
-scrapers for different websites
-automatic sentence alignment of parallel documents
-corpus of 708 aligned documents
 
 
-From~\autocite{Ansch_tz_2023}:
-data for german language simplification is scarce
-pretraining causal language models improves ATS performance
-using monolingual Easy Language Data to fine-tune a GPT-like models
--> decoder output in style of \gls{el}
-training ATS task on pretrained mBart model (replacing decoder with above-mentioned GPT-like Decoders, trainig cross-attention only)
-publish web scraper for different website with easy language
-
-From ~\autocite{stodden-etal-2023-deplain}
-DEPlain corpus
 
 From~\autocite{klöser2024german}:
 previous work
