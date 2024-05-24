@@ -211,6 +211,7 @@ Writers of \gls{pl} are supposed to factor in the audience of the text and make 
 \end{figure}
 
 
+ % TODO: CEFR, UN, (BITV 2.0)
 %\section{Terminologie}\label{sec:term}
 
 %ambiguity of terminology
@@ -273,28 +274,23 @@ It is much easy to assemble a monolingual corpus that usually only contains text
 While these monolingual corpora are less optimal than parallel data they can still be used in various ways to improve machine translation systems~\autocite{lample2018unsupervised, burlot2019using, chan2023routledge}.
 
 Unfortunately data for german language simplification is scarce~\autocite{Ansch_tz_2023}.
-Much recent research has focused on creating corpora for \gls{el} and \gls{pl} to make Deep Learning approaches more feasible.
+Most recent research has focused on creating corpora for \gls{el} and \gls{pl} to make Deep Learning approaches more feasible.
+
+\autocite{klaper-etal-2013-building} build the first parallel corpus for german text simplification that consists of 256 texts~\autocite{ebeling2022}.
+This corpus was later extended by~\autocite{battisti-etal-2020-corpus}.
+The texts were extracted from PDF-files and websites.
+The extended corpus includes 6,217 documents of which the majority are monolingual (i.e.\ simplifications only) and is referred to as the \enquote{Web-Corpus} by~\autocite{ebeling2022}.
+\autocite{sauberli-etal-2020-benchmarking} gather parallel data of news items provided by the \enquote{Austria Presse Agentur} (APA) that were manually simplified under the guidelines of \gls{capito}.
+All in all the \enquote{APA-Corpus} contains 2,426 distinct documents~\autocite{ebeling2022}.
+The data is then used to train \gls{ATS}-models for sentence-level simplifications using the transformer architecture (see section~\ref{sec:trans}). %TODO: first neural simplification approach based on transformers, "lack of fluency and content preservation" (~\autocite{Ansch_tz_2023})
+
+
 
 %\enquote{Deep Learning} is a subset of \enquote{Machine Learning}~\autocite{jagdaleDeepLearning2022}.
 
 
 \section{Notes}\label{sec:notes}
 
-From~\autocite{klaper-etal-2013-building}:
-build the first parallel corpus for german text simplification
-extended by ~\autocite{battisti-etal-2020-corpus}
-known as \enquote{Web-Corpus}~\autocite{ebeling2022}, needs to be requested
-
-
-From~\autocite{sauberli-etal-2020-benchmarking}
-first neural simplification approach based on transformers (~\autocite{Ansch_tz_2023})
-"lack of fluency and content preservation"
-parallel Austria Presse Agentur (APA) corpus (simplification into levels B1 and A2 (not strictly \gls{el}))
-Training transformer models for sentence level simplification
-
-From~\autocite{battisti-etal-2020-corpus}
-publish corpus with parallel and monolingual-only (simplified German) data (consisting of about 6,200 documents)
-back-translation (~\autocite{sennrich-etal-2016-improving})
 
 From~\autocite{rios-etal-2021-new}:
 20min Dataset (17 905 article pairs (parallel), plain language strongly summarized)
@@ -330,6 +326,9 @@ using monolingual Easy Language Data to fine-tune a GPT-like models
 training ATS task on pretrained mBart model (replacing decoder with above-mentioned GPT-like Decoders, trainig cross-attention only)
 publish web scraper for different website with easy language
 
+From ~\autocite{stodden-etal-2023-deplain}
+DEPlain corpus
+
 From~\autocite{klöser2024german}:
 previous work
 using ChatGPT to generate standard language from monolingual \gls{el} and \gls{pl} to form synthetic parallel data
@@ -337,6 +336,8 @@ show that rule-based evaluations for \gls{el} are limited
 evaluation of this seq2seq task is very difficult
 
 back-translation (~\autocite{sennrich-etal-2016-improving})
+
+
 
 
 % TODO: Evaluation
