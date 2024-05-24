@@ -5,7 +5,7 @@ In the digital age written text has become ubiquitous. % (TODO: cite?~\autocite{
 
 Today the ability to comprehend text is a necessary prerequisite to actively participate in society. % nowadays
 This poses a challenge to people with communication impairments~\autocite{easyLanguageBook}.
-In Germany about 12\% of the population has difficulties to understand and write standard german because of reduced literacy~\autocite{schomacker2023data}.
+In Germany, about 12\% of the population has difficulties to understand and write standard german because of reduced literacy~\autocite{schomacker2023data}.
 Complicated texts can act as a barrier which prevents these people from taking part in everyday life~\autocite{easyLanguageBook}
 % could lead to exclusion,
 
@@ -13,7 +13,7 @@ Several attempts have been made to create a type of written language that is mor
 The primary goal of such languages is to improve communication for a broad range of people with limited reading and writing skills.
 This group includes people with communication impairments, people with dementia, language learners, \gls{illit} and older people with visual impairments~\autocite{easyLanguageBook}.
 
-In German two simplified language have gained popularity in recent years: \enquote{Easy Language} and \enquote{Plain Language}.
+In German, two simplified languages have gained popularity in recent years: \enquote{Easy Language} and \enquote{Plain Language}.
 
 %The simplified language has to be simple enough to be understood by everyone.
 %At the same time it should not be impractical for people that are proficient in standard language.
@@ -69,7 +69,7 @@ Once a word was introduced to describe a subject, that word should be used again
     \label{fig:subject_ref}
 \end{figure}
 Shorter words are preferred over longer words.
-If long words are necessary they should be split with a hyphen character (e.g.\ \enquote{Bundes-Gleichstellungs-Gesetz} instead of \enquote{Bundesgleichstellungsgesetz}).
+If long words are necessary, they should be split with a hyphen character (e.g.\ \enquote{Bundes-Gleichstellungs-Gesetz} instead of \enquote{Bundesgleichstellungsgesetz}).
 Additional rules for words are
 \begin{itemize}[noitemsep]
     \item the avoidance of acronyms
@@ -124,7 +124,7 @@ In the translation process from standard German to \gls{el} content can be omitt
 Likewise, additional content can be added to make the text more understandable.
 
 The presentation of text is another aspect that impacts clarity and readability.
-The \gls{el}-guideline recommends to use a big font size and big line spacing.
+The \gls{el}-guideline recommends using a big font size and big line spacing.
 Furthermore, text is to be left-aligned.
 Backgrounds are supposed to be in light color while the written text is colored darkly.
 Text should be structured in many paragraphs with frequent headlines.
@@ -137,7 +137,7 @@ Images can be added to accompany the text~\autocite{netzwerkLS}.
 The unique layout with very short lines makes it easy to recognize texts in \gls{el}.
 This helps the target group to find texts written in \gls{el} easily.
 But the strong divergence from standard German has been repeatedly criticised.
-In 2015 the Federal State Parliament of Schleswig-Holstein passed a law to make elections more accessible.
+In 2015, the Federal State Parliament of Schleswig-Holstein passed a law to make elections more accessible.
 Information regarding elections was sent out to all voters in \gls{el}.
 This sparked outrage in the population and was denounced by multiple politicians.
 As a result the passed law was reverted~\autocite{easyLanguageBook}.
@@ -170,8 +170,8 @@ Today \gls{el} can be found on many websites of government departments and munic
 \section{Plain Language}\label{sec:pl}
 \gls{pl} is a simplified language that is much closer to standard language.
 Originally, it was not intended for people with disabilities.
-\gls{pl} is often used to explain domain specific texts in expert language to less informed people.
-Moreover, it addresses language learners e.g.\ migrants and people that learn German as a second language~\autocite{easyLanguageBook}.
+\gls{pl} is often used to explain domain-specific texts in expert language to less informed people.
+Moreover, it addresses language learners, e.g.\ migrants and people that learn German as a second language~\autocite{easyLanguageBook}.
 
 In the English language guidelines for \gls{pl} have existed for a long time.
 Some early works on more accessible language were published in the beginning of the 20th century.
@@ -197,7 +197,7 @@ Typical features of \gls{pl} are
     \item clear sentence structure (e.g.\ a maximum of two subordinate clauses)
     \item avoidance of acronyms
 \end{itemize}
-These directives are similar to some of the rules in the \gls{el}-guideline.
+These directives are similar to some rules in the \gls{el}-guideline.
 But \gls{pl} does not break any rules of standard German.
 That might be a reason why \gls{pl} is generally viewed in a more positive light than \gls{el} by many people. % viewed favorably
 Moreover, \gls{pl} can be more flexible and less restrictive as there are no fixed rules.
@@ -254,7 +254,7 @@ Especially simplification of German text has not seen a lot of research~\autocit
 
 Some \gls{ats}-methods focus only on sentence-level simplifications while other approaches aim to simplify whole documents.
 Simplifications on sentence-level have the advantage that the \gls{ats}-System has to perform less complex transformations on the text.
-But certain features of \gls{el} like the organization of content order and structure (see section~\ref{subsec:el-rules}) can not be taken into account. %TODO: Braucht das eine quelle oder ist das offensichtlich?
+But certain features of \gls{el} like the organization of content order and structure (see section~\ref{subsec:el-rules}) cannot be taken into account. %TODO: Braucht das eine quelle oder ist das offensichtlich?
 Document-level simplifications do not have this problem.
 However, they require the \gls{ats}-system to be able to process longer sequences and to carry out very complex modifications.
 
@@ -270,20 +270,31 @@ In the setting of language translation \enquote{parallel data} is very useful.
 A parallel corpus contains pairs of source and target texts that function as an example for the task.
 For \gls{ats} a parallel example would consist of a source text in standard language and a corresponding simplification.
 Creating a parallel corpus is difficult as source and target text need to be properly aligned.
-It is much easy to assemble a monolingual corpus that usually only contains texts in the target language~\autocite{chan2023routledge}.
+It is much easier to assemble a monolingual corpus that usually only contains texts in the target language~\autocite{chan2023routledge}.
 While these monolingual corpora are less optimal than parallel data they can still be used in various ways to improve machine translation systems~\autocite{lample2018unsupervised, burlot2019using, chan2023routledge}.
 
-Unfortunately data for german language simplification is scarce~\autocite{Ansch_tz_2023}.
+Unfortunately, data for german language simplification is scarce~\autocite{Ansch_tz_2023}.
 Most recent research has focused on creating corpora for \gls{el} and \gls{pl} to make Deep Learning approaches more feasible.
 
-\autocite{klaper-etal-2013-building} build the first parallel corpus for german text simplification that consists of 256 texts~\autocite{ebeling2022}.
-This corpus was later extended by~\autocite{battisti-etal-2020-corpus}.
-The texts were extracted from PDF-files and websites.
-The extended corpus includes 6,217 documents of which the majority are monolingual (i.e.\ simplifications only) and is referred to as the \enquote{Web-Corpus} by~\autocite{ebeling2022}.
-\autocite{sauberli-etal-2020-benchmarking} gather parallel data of news items provided by the \enquote{Austria Presse Agentur} (APA) that were manually simplified under the guidelines of \gls{capito}.
+\textcite{klaper-etal-2013-building} build the first parallel corpus for german text simplification that consists of 256 texts~\autocite{ebeling2022}.
+This corpus was later extended by~\textcite{battisti-etal-2020-corpus}.
+The texts were extracted from PDF files and websites.
+The extended corpus includes 6,217 documents of which the majority are monolingual (i.e.\ simplifications only) and is referred to as the \enquote{Web-Corpus} by~\textcite{ebeling2022}.
+\textcite{sauberli-etal-2020-benchmarking} gather parallel data from news items provided by the \enquote{Austria Presse Agentur} (APA) that were manually simplified under the guidelines of \gls{capito}.
 All in all the \enquote{APA-Corpus} contains 2,426 distinct documents~\autocite{ebeling2022}.
-The data is then used to train \gls{ATS}-models for sentence-level simplifications using the transformer architecture (see section~\ref{sec:trans}). %TODO: first neural simplification approach based on transformers, "lack of fluency and content preservation" (~\autocite{Ansch_tz_2023})
+The data is then used to train \gls{ats}-models for sentence-level simplifications using the transformer architecture (see section~\ref{sec:trans}). %TODO: first neural simplification approach based on transformers, "lack of fluency and content preservation" (~\autocite{Ansch_tz_2023})
+This is possibly the first transformer-based approach to german \gls{ats}~\autocite{Ansch_tz_2023}.
+The company \gls{capito} also built a parallel corpus of about 1000 documents that is not publicly available~\autocite{ebeling2022}.
 
+All the above-mentioned datasets contain a mix of different simplification levels.
+Moreover, due to copyright issues, most of the data is not easily accessible~\autocite{stodden-etal-2023-deplain}.
+
+\textcite{rios-etal-2021-new} create and publish a parallel document-level corpus from articles of the Swiss news magazine \enquote{20 Minuten} containing 17,905 article pairs.
+The simplifications are written in \gls{pl} and are strongly summarized.
+They train transformer-based language models on the published dataset while also including the \enquote{Capito Corpus} and the \enquote{APA Corpus}.
+
+Another transformer-based approach for \gls{ats} is presented by~\textcite{spring-etal-2021-exploring}.
+Their models are also trained on the corpora \enquote{Capito} and \enquote{APA} and can output different levels of simplified language based on the \gls{cefr}.
 
 
 %\enquote{Deep Learning} is a subset of \enquote{Machine Learning}~\autocite{jagdaleDeepLearning2022}.
@@ -292,14 +303,6 @@ The data is then used to train \gls{ATS}-models for sentence-level simplificatio
 \section{Notes}\label{sec:notes}
 
 
-From~\autocite{rios-etal-2021-new}:
-20min Dataset (17 905 article pairs (parallel), plain language strongly summarized)
-mBART architecture for document level simplification
-
-From~\autocite{spring-etal-2021-exploring}
-system that can output different levels of simplified language based on
-Common European Framework of References for Languages (CEFR)(~\autocite{Ansch_tz_2023})
-controlling copying behaviour
 
 From~\autocite{naderi2019subjective}
 TextComplexityDE: 250 parallel sentences
