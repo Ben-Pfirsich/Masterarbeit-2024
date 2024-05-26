@@ -111,32 +111,6 @@
 % TODO: mit diesem Paket können automatisch Akronyme verwaltet und genutzt werden; hier wird explizit kein Abkürzungsverzeichnis erstellt und entsprechend auch keine Verweise auf dieses eingefügt; eventuell lohnt es sich hierfür das Paket glossaries-extra zu betrachten, das eine (noch) bessere Unterstützung von Akronymen und Abkürzungen verspricht (habe ich nicht getestet)
 \usepackage[acronym]{glossaries}
 
-\usepackage{listings}
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{blue!10},
-    commentstyle=\color{blue!50},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{gray!30},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    keepspaces=true,
-    numbers=left,
-    numbersep=5pt,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    tabsize=2,
-    emph={
-        FROM,EXPOSE, COPY, CMD, apiVersion, kind, metadata, name, labels, app, spec, replicas, selector, matchLabels, template, containers, image, ports, containerPort, pipeline, agent, stages, stage, steps, script, description, default, taskRef, params, value, tasks, runAfter
-    },
-    emphstyle={\color{magenta}}
-}
-
-\lstset{style=mystyle}
-
 % Literatur
 \usepackage[backend=biber, style=authoryear-comp, sorting=none, maxbibnames=100, maxcitenames=1, giveninits=true]{biblatex}
 \addbibresource{references.bib} % Dokument mit Quellen
