@@ -1,11 +1,11 @@
 \chapter{Introduction}\label{ch:introduction}
 
-In the digital age written text has become ubiquitous. % (TODO: cite?~\autocite{salar-mohtaj-babak-naderi-2022-overview})
-%It is an important tool for exchanging information be it on websites, in newspapers, in online messages or e-mails.
-% TODO: Examples for important written text: Websites, Online Messages like E-Mails, Newspapers, Government Authorities (distribute Information)
+In the digital age written text has become ubiquitous.
+Websites, newspapers, online messages and social media all heavily rely on text.
+Both the importance and frequency of text-based content has increased in recent years~\autocite{salar-mohtaj-babak-naderi-2022-overview}.
 Today the ability to comprehend text is a necessary prerequisite to actively participate in society. % nowadays
 This poses a challenge to people with communication impairments~\autocite{easyLanguageBook}.
-In Germany, about 12\% of the population has difficulties to understand and write standard german because of reduced literacy~\autocite{schomacker2023data}.
+In Germany, about 12\% of the population has difficulties to understand and write standard German because of reduced literacy~\autocite{schomacker2023data}.
 Complicated texts can act as a barrier that prevents these people from taking part in everyday life~\autocite{easyLanguageBook}.
 % could lead to exclusion,
 
@@ -17,7 +17,6 @@ In German, two simplified languages are actively used: \enquote{Easy Language} a
 
 %The simplified language has to be simple enough to be understood by everyone.
 %At the same time it should not be impractical for people that are proficient in standard language.
-
 
 \section{Easy Language}\label{sec:el}
 
@@ -248,9 +247,11 @@ It is a \gls{seq2seq}-task~\autocite{Ansch_tz_2023} meaning the desired system h
 \gls{ats} is a relatively new \gls{nlp}-task~\autocite{schomacker2023data}.
 Especially simplification of German text has not seen a lot of research~\autocite{Ansch_tz_2023}.
 
+\subsection{Related Work}\label{subsec:related-work}
+
 Some \gls{ats}-methods focus only on sentence-level simplifications while other approaches aim to simplify whole documents.
 Simplifications on sentence-level have the advantage that the \gls{ats}-System has to perform less complex transformations on the text.
-But certain features of \gls{el} like the organization of content order and structure (see section~\ref{subsec:el-rules}) cannot be taken into account. %TODO: Braucht das eine quelle oder ist das offensichtlich?
+But certain features of \gls{el} like content order and structure (see section~\ref{subsec:el-rules}) cannot be taken into account. %TODO: Braucht das eine quelle oder ist das offensichtlich?
 Document-level simplifications do not have this problem.
 However, they require the \gls{ats}-system to be able to process longer sequences and to carry out very complex modifications.
 
@@ -343,7 +344,6 @@ While the results of the trained models are promising, there is still a lot of r
     \item Some model outputs can contain very obvious mistakes that result in nonsensical sentences.
     This possibly results from the limited capabilities of the used base model and architecture.
 \end{itemize}
-
 The goal of this work is to improve the aforementioned models by extending the training data and testing different model architectures and training methods.
 
 
