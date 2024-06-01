@@ -4,8 +4,17 @@ Creating machines with human-like language understanding has been a subject of r
 \gls{natural-language}s are highly complex and pose a difficult challenge to computers.
 \gls{lm} is an approach to make machines read, write and communicate like humans~\autocite{zhao2023survey}.
 
-The main idea of \gls{lm} is to model probabilities of
+The main idea of \gls{lm} is to estimate probability distributions over units of texts, e.g.\ words~\autocite{de2015survey}.
+Assuming that the occurrence of a word depends on previous words, i.e.\ the context, the probability of that word being next in a sentence can be modeled with a conditional probability~\autocite{jozefowicz2016exploring}.
+\[
+    P(w_n | w_1, \dots , w_{n-1})
+\]
+% TODO: quelle finden vielleicht
+The ability to estimate the probability distributions of such language units makes it possible to predict the next words for a given sequence.
 
+
+
+\section{notes}
 language modeling approach: text as a sequence of words -> model generative likelihood
 -> predict probability of next tokens
 
@@ -16,7 +25,6 @@ from~\autocite{jozefowicz2016exploring}:
 language modeling has found use in many \gls{nlp} tasks
 speech recognition, machine translation, text summarization
 
-probability distribution over words~\autocite{de2015survey}
 
 
 
