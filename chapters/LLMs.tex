@@ -2,6 +2,7 @@
 
 Creating machines with human-like language understanding has been a subject of research since the 1950s.
 \gls{natural-language}s are highly complex and pose a difficult challenge to computers.
+% ambiguous: ~\autocite{quadarLM2020}
 \gls{lm} is an approach to make machines read, write and communicate like humans~\autocite{zhao2023survey}.
 
 The main idea of \gls{lm} is to estimate probability distributions over units of texts, e.g.\ words~\autocite{de2015survey}.
@@ -11,22 +12,55 @@ Assuming that the occurrence of a word depends on previous words, i.e.\ the cont
 \]
 % TODO: quelle finden vielleicht
 The ability to estimate the probability distributions over words makes it possible to predict the next word for a given sequence.
-In this way, language models can be applied in many \gls{nlp} tasks like speech recognition, machine translation, text summarization~\autocite{jozefowicz2016exploring}.
+In this way, language models can be applied in many \gls{nlp} tasks like speech recognition, machine translation and text summarization~\autocite{jozefowicz2016exploring}.
+By simply predicting the next word, language models can hold human-like conversations, which makes it appear as if they understand natural language.
 % How would translation look like?
+% TODO: Other approaches like BERT Masked language Modeling
+%Other approaches to \gls{lm} mask parts of sentences and use all surrounding language units to predict the missing
 
-There are different techniques to model those probability distributions.
+There are different techniques to model these probabilities of word sequences.
 In the 1990s, statistical language models found widespread use.
 % TODO: was sind statistical language models
 Recent research has focused on neural language models.
+Neural based approaches excel at extracting meaningful representations.
 
+\section{notes}
 
-%\section{notes}
+From ~\autocite{quadarLM2020}:
+Markov assumption: distribution of a word depends on fixed length of previous words
+statistical: n-gram models: tables of conditional probabilities estimated by counting n-gram occurrences and finding relative frequency (P(you | thank) = count(thank you)/count(thank))
 
+deep neural networks more flexible
+extracting features of words and finding vector representation that depend on context
+\enquote{embedding}: type of representation for a documents where words with similar meaning have similar representations (in mathematical sense)
+Embeddings lie in vector spaces and are represented by real vectors
+practical for neural networks
 
+From ~\autocite{Hadi_2023}:
+\gls{lm}: predict next word or character for a given sequence of text
 
+\gls{llm}s result of rise of deep learning, availability of huge datasets, powerful computing devices
+\gls{llm} usually refers to lm with transformer architecture
 
+neural networks better at capturing long-range depencies in text, and complex features
+understanding context
+breakthrough for llm: "attention is all you need"
 
+during pre-training: models see diverse texts and learn grammar, facts, reasoning
+fine-tuning for more specific task ("narrow dataset")
 
+from ~\autocite{Raiaan2024ARO}:
+pre-training on large corpora from the web -> learning complicated patterns and language subtleties
+fine-tuning on downstream tasks gives state-of-the-art performance
+neural language model in 2010s
+"comprehend, produce, forecast human language"
+BERT and GPT as miles-stones (attention)
+improved performance by scaling up models
+pre-training with extensive datasets
+
+from~\autocite{zhao2023survey}:
+learning features -> help in various nlp tasks
+Pre-trained language models (PLM) -> context-aware word representations (versitlie)
 
 
 \section{Deep Neural Networks}\label{sec:dnn}
