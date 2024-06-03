@@ -19,23 +19,22 @@ By simply predicting the next word, language models can hold human-like conversa
 %Other approaches to \gls{lm} mask parts of sentences and use all surrounding language units to predict the missing
 
 There are different techniques to model these probabilities of word sequences.
-In the 1990s, \gls{slm} found widespread use.
+In the 1990s, \glsfirst{slm} found widespread use.
 The models often assume that the distribution of a word only depends on a fixed length of previous words.
-\enquote{$n-grams$ models} are \gls{slm}s that use the previous $n$ words to calculate the probability distribution of the next word.
+\enquote{$n$-grams models} are \glsentryshort{slm}s that use the previous $n$ words to calculate the probability distribution of the next word.
 Based on a training corpus, tables of conditional probabilities are created.
-The probabilities are approximated by counting occurrences of $n-grams$.
+The probabilities are approximated by counting occurrences of $n$-grams.
 If the previous word is \enquote{thank}, the probability that the next word is \enquote{you} could be estimated as follows~\autocite{quadarLM2020}
 \[
     P(\text{you} | \text{thank}) = \frac{count(\text{thank you})}{count(\text{thank})}
 \]
-
-In recent years, research has been focused on the more flexible neural language models.
+In recent years, research has been focused on the more flexible \glsfirst{nlm}~\autocite{quadarLM2020}.
+This approach uses \glsfirst{dnn} to model the probability distributions over words.
 
 
 \section{notes}
 
 From ~\autocite{quadarLM2020}:
-deep neural networks more flexible
 extracting features of words and finding vector representation that depend on context
 \enquote{embedding}: type of representation for a document where words with similar meaning have similar representations (in mathematical sense)
 Embeddings lie in vector spaces and are represented by real vectors
@@ -49,6 +48,7 @@ From ~\autocite{Hadi_2023}:
 
 neural networks better at capturing long-range depencies in text, and complex features
 understanding context
+
 breakthrough for llm: "attention is all you need"
 
 during pre-training: models see diverse texts and learn grammar, facts, reasoning
