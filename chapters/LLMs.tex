@@ -19,20 +19,25 @@ By simply predicting the next word, language models can hold human-like conversa
 %Other approaches to \gls{lm} mask parts of sentences and use all surrounding language units to predict the missing
 
 There are different techniques to model these probabilities of word sequences.
-In the 1990s, statistical language models found widespread use.
-% TODO: was sind statistical language models
-Recent research has focused on neural language models.
-Neural based approaches excel at extracting meaningful representations.
+In the 1990s, \gls{slm} found widespread use.
+The models often assume that the distribution of a word only depends on a fixed length of previous words.
+\enquote{$n-grams$ models} are \gls{slm}s that use the previous $n$ words to calculate the probability distribution of the next word.
+Based on a training corpus, tables of conditional probabilities are created.
+The probabilities are approximated by counting occurrences of $n-grams$.
+If the previous word is \enquote{thank}, the probability that the next word is \enquote{you} could be estimated as follows~\autocite{quadarLM2020}
+\[
+    P(\text{you} | \text{thank}) = \frac{count(\text{thank you})}{count(\text{thank})}
+\]
+
+In recent years, research has been focused on the more flexible neural language models.
+
 
 \section{notes}
 
 From ~\autocite{quadarLM2020}:
-Markov assumption: distribution of a word depends on fixed length of previous words
-statistical: n-gram models: tables of conditional probabilities estimated by counting n-gram occurrences and finding relative frequency (P(you | thank) = count(thank you)/count(thank))
-
 deep neural networks more flexible
 extracting features of words and finding vector representation that depend on context
-\enquote{embedding}: type of representation for a documents where words with similar meaning have similar representations (in mathematical sense)
+\enquote{embedding}: type of representation for a document where words with similar meaning have similar representations (in mathematical sense)
 Embeddings lie in vector spaces and are represented by real vectors
 practical for neural networks
 
@@ -60,8 +65,20 @@ pre-training with extensive datasets
 
 from~\autocite{zhao2023survey}:
 learning features -> help in various nlp tasks
-Pre-trained language models (PLM) -> context-aware word representations (versitlie)
+Pre-trained language models (PLM) -> context-aware word representations (versatile, usable for various tasks)
+learning general purpose features (pre-training and fine-tuning) -> (GPT 2)
+fine-tuning is necessary
 
+Large Language Models (LLM) -> scaling PLMs improves performance (bigger more complex models)
+surprising abilities (emergent abilities)
+solve complex tasks without fine-tuning
+ChatGPT with amazing conversation abilities
+
+task-agnostic representations -> less human feature engineering
+
+from~\autocite{bhatia2023tart}:
+in-context learning of LLMs: perform tasks given only a few examples, not updating model parameters
+impressive results but usually still outperformed by fine-tuning
 
 \section{Deep Neural Networks}\label{sec:dnn}
 
@@ -87,6 +104,8 @@ Pre-trained language models (PLM) -> context-aware word representations (versitl
 \section{Supervised Fine-Tuning (SFT)}\label{sec:supervised-fine-tuning}
 
 \section{Alignment Methods}\label{sec:alignment-methods}
+from~\autocite{zhao2023survey}:
+capture properties of training corpus
 
 \subsection{RLHF}\label{subsec:rlhf}
 \subsection{PPO}\label{subsec:ppo}
