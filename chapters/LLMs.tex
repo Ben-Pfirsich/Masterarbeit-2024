@@ -30,35 +30,27 @@ If the previous word is \enquote{thank}, the probability that the next word is \
 \]
 In recent years, research has been focused on the more flexible \glspl{nlm}~\autocite{quadarLM2020}.
 This approach uses \glspl{dnn} to estimate the needed probability distributions.
-\glspl{dnn} are much better at taking long-range depencies in text into account than \glspl{slm}~\autocite{Hadi_2023}.
-They manage to capture and extract complex features from text.
+\glspl{nlm} are much better at taking long-range depencies in text into account than \glspl{slm}~\autocite{Hadi_2023}.
+\glspl{dnn} excel at extracting complex features from text and finding meaningful representations for words.
+These representations (often called embeddings) lie in a vector space of real vectors where similar words are close to each other in a mathematical sense~\autocite{quadarLM2020}.
+In \glspl{nlm} the prediction function is usually built on top of these embeddings.
+The intermediate step of learning effective features and representing them in embeddings has the benefit that those embeddings can be reused for other tasks.
+In the early 2010s, neural networks that specialized in creating word embeddings (e.g.\ word2vec) were successfully used to in various \gls{nlp}-Tasks.
+
+% TODO: feature learning, representation learning
 
 \section{notes}
-From ~\autocite{quadarLM2020}:
-extracting features of words and finding vector representation that depend on context
-\enquote{embedding}: type of representation for a document where words with similar meaning have similar representations (in mathematical sense)
-Embeddings lie in vector spaces and are represented by real vectors
-practical for neural networks
 
-From ~\autocite{Hadi_2023}:
-\gls{llm}s result of rise of deep learning, availability of huge datasets, powerful computing devices
-\gls{llm} usually refers to lm with transformer architecture
-understanding context
-breakthrough for llm: "attention is all you need"
-during pre-training: models see diverse texts and learn grammar, facts, reasoning
-fine-tuning for more specific task ("narrow dataset")
-
-from ~\autocite{Raiaan2024ARO}:
-pre-training on large corpora from the web -> learning complicated patterns and language subtleties
-fine-tuning on downstream tasks gives state-of-the-art performance
-neural language model in 2010s
-"comprehend, produce, forecast human language"
-BERT and GPT as miles-stones (attention)
-improved performance by scaling up models
-pre-training with extensive datasets
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{images/languagemodels}
+    \caption[TODO.]{TODO}
+    \label{fig:language-models}
+\end{figure}
 
 from~\autocite{zhao2023survey}:
-learning features -> help in various nlp tasks
+
+
 Pre-trained language models (PLM) -> context-aware word representations (versatile, usable for various tasks)
 learning general purpose features (pre-training and fine-tuning) -> (GPT 2)
 fine-tuning is necessary
@@ -69,6 +61,26 @@ solve complex tasks without fine-tuning
 ChatGPT with amazing conversation abilities
 
 task-agnostic representations -> less human feature engineering
+
+from ~\autocite{Raiaan2024ARO}:
+pre-training on large corpora from the web -> learning complicated patterns and language subtleties
+fine-tuning on downstream tasks gives state-of-the-art performance
+neural language model in 2010s
+"comprehend, produce, forecast human language"
+BERT and GPT as miles-stones (attention)
+improved performance by scaling up models
+pre-training with extensive datasets
+
+From ~\autocite{Hadi_2023}:
+\gls{llm}s result of rise of deep learning, availability of huge datasets, powerful computing devices
+\gls{llm} usually refers to lm with transformer architecture
+understanding context
+breakthrough for llm: "attention is all you need"
+during pre-training: models see diverse texts and learn grammar, facts, reasoning
+fine-tuning for more specific task ("narrow dataset")
+
+from~\autocite{Liu_2020}:
+representation learning
 
 from~\autocite{bhatia2023tart}:
 in-context learning of LLMs: perform tasks given only a few examples, not updating model parameters
