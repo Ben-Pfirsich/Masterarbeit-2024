@@ -45,58 +45,45 @@ These context-aware language models are trained on large unlabeled corpora of te
 During training, the models learn to solve pre-training tasks that are specifically designed for the language model to gain essential language understanding.
 They are often put into their own class of language models, the so-called \glspl{plm}.
 \glspl{plm} set new standards in solutions of many \gls{nlp}-tasks.
+They learn general-purpose features that can be effectively used by fine-tuning the models on downstream tasks, e.g.\ machine translation, text summarization or \gls{ats}.
+The process of using a \gls{plm} as a base model to fine-tune it for a specific task has become a commonly used pattern in \gls{lm}~\autocite{zhao2023survey}.
 
-They learn general-purpose features that are u
+The availability of huge datasets and powerful computing devices led to another evolution in \gls{lm}.
+\glspl{llm} are \glspl{plm} that are scaled in model size.
+They are usually based on the popular transformer architecture~\autocite{Hadi_2023} and consist of billions of parameters.
+Research found that using larger models with more extensive pre-training on larger datasets greatly improves performance~\autocite{Raiaan2024ARO}.
+\glspl{llm} even show unexpected abilities (called emergent abilities) that could not be observed in smaller models, e.g.\ reasoning and solving complex tasks without fine-tuning~\autocite{zhao2023survey}.
+They are capable of \enquote{in-context learning} meaning they can perform tasks given only instructions and a few examples without the need of updating model parameters~\autocite{bhatia2023tart}.
+ChatGPT is an example of a popular \gls{LLM} with amazing conversation and task solving abilities~\autocite{zhao2023survey}.
+
+While \glspl{llm} produce impressive results with \enquote{in-context learning} for specific tasks they are usually still outperformed by fine-tuned language models~\autocite{bhatia2023tart}.
+In the context of German \gls{ATs} this is supported by the results of~\autocite{deilen2023using}.
 
 %With the introduction of the transformer architecture in 2017~\autocite{vaswani2023attention}
-
+%task-agnostic representations -> less human feature engineering~\autocite{zhao2023survey}
 
 \section{notes}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{images/languagemodels}
-    \caption[TODO.]{TODO}
-    \label{fig:language-models}
-\end{figure}
-
 from~\autocite{zhao2023survey}:
-
-Pre-trained language models (PLM) -> context-aware word representations (versatile, usable for various tasks)
-learning general purpose features (pre-training and fine-tuning) -> (GPT 2)
-fine-tuning is necessary
-
-Large Language Models (LLM) -> scaling PLMs improves performance (bigger more complex models)
-surprising abilities (emergent abilities)
-solve complex tasks without fine-tuning
-ChatGPT with amazing conversation abilities
-
-task-agnostic representations -> less human feature engineering
+language modeling to task solving
 
 from ~\autocite{Raiaan2024ARO}:
 pre-training on large corpora from the web -> learning complicated patterns and language subtleties
 fine-tuning on downstream tasks gives state-of-the-art performance
-neural language model in 2010s
 "comprehend, produce, forecast human language"
-BERT and GPT as miles-stones (attention)
-improved performance by scaling up models
-pre-training with extensive datasets
 
 From ~\autocite{Hadi_2023}:
-\gls{llm}s result of rise of deep learning, availability of huge datasets, powerful computing devices
-\gls{llm} usually refers to lm with transformer architecture
-understanding context
-breakthrough for llm: "attention is all you need"
 during pre-training: models see diverse texts and learn grammar, facts, reasoning
-fine-tuning for more specific task ("narrow dataset")
-
-from~\autocite{Liu_2020}:
-representation learning
 
 from~\autocite{bhatia2023tart}:
-in-context learning of LLMs: perform tasks given only a few examples, not updating model parameters
 impressive results but usually still outperformed by fine-tuning
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{images/languagemodels}
+    \caption[TODO.]{TODO~\autocite{zhao2023survey}}
+    \label{fig:language-models}
+\end{figure}
 \section{Deep Neural Networks}\label{sec:dnn}
 
 \subsection{Multi Layer Perceptron}\label{subsec:multi-layer-perceptron}
