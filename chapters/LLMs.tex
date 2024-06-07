@@ -35,9 +35,21 @@ This approach uses \glspl{dnn} to estimate the needed probability distributions.
 These representations (often called embeddings) lie in a vector space of real vectors where similar words are close to each other in a mathematical sense~\autocite{quadarLM2020}.
 In \glspl{nlm} the prediction function is usually built on top of these embeddings.
 The intermediate step of learning effective features and representing them in embeddings has the benefit that those embeddings can be reused for other tasks.
-In the early 2010s, neural networks that specialized in creating word embeddings (e.g.\ word2vec) were successfully used to in various \gls{nlp}-Tasks.
+The early 2010s saw the rise of \glspl{dnn} that were specifically designed to create powerful word embeddings~\autocite{zhao2023survey}.
+These embeddings were static, meaning the network would assign each word exactly one embedding, disregarding polysemy of words~\autocite{Liu_2020}.
+Embeddings of popular solutions like \enquote{word2vec} proved to be very useful in various \gls{nlp}-Tasks.
 
-% TODO: feature learning, representation learning
+Following research focused on incorporating context into word embeddings, i.e.\ assigning a different vector representation to a word depending on the surrounding words.
+ELMo, BERT and GPT are well-known models that managed to do so.
+These context-aware language models are trained on large unlabeled corpora of text data.
+During training, the models learn to solve pre-training tasks that are specifically designed for the language model to gain essential language understanding.
+They are often put into their own class of language models, the so-called \glspl{plm}.
+\glspl{plm} set new standards in solutions of many \gls{nlp}-tasks.
+
+They learn general-purpose features that are u
+
+%With the introduction of the transformer architecture in 2017~\autocite{vaswani2023attention}
+
 
 \section{notes}
 
@@ -49,7 +61,6 @@ In the early 2010s, neural networks that specialized in creating word embeddings
 \end{figure}
 
 from~\autocite{zhao2023survey}:
-
 
 Pre-trained language models (PLM) -> context-aware word representations (versatile, usable for various tasks)
 learning general purpose features (pre-training and fine-tuning) -> (GPT 2)
