@@ -56,40 +56,106 @@ Research found that using larger models with more extensive pre-training on larg
 They are capable of \enquote{in-context learning} meaning they can perform tasks given only instructions and a few examples without the need of updating model parameters~\autocite{bhatia2023tart}.
 ChatGPT is an example of a popular \gls{LLM} with amazing conversation and task solving abilities~\autocite{zhao2023survey}.
 
-While \glspl{llm} produce impressive results with \enquote{in-context learning} for specific tasks they are usually still outperformed by fine-tuned language models~\autocite{bhatia2023tart}.
-In the context of German \gls{ATs} this is supported by the results of~\autocite{deilen2023using}.
+While \glspl{llm} produce impressive results with \enquote{in-context learning} they are usually still outperformed by fine-tuned language models in specific tasks~\autocite{bhatia2023tart}.
+In the context of German \gls{ats} this is supported by the results of~\textcite{deilen2023using} who find that ChatGPT can only create very rudimentary simplifications.
 
-%With the introduction of the transformer architecture in 2017~\autocite{vaswani2023attention}
-%task-agnostic representations -> less human feature engineering~\autocite{zhao2023survey}
+The course of action for this thesis is to use pre-trained base models to fine-tune them on the task of \gls{ats}.
+Due to hardware limitations, only \glspl{plm} with up to 13 billion parameters come into question.
+In the following sections the underlying workings of \glspl{nlm}, \glspl{plm} and \glspl{llm} will be explained.
 
-\section{notes}
-
-from~\autocite{zhao2023survey}:
-language modeling to task solving
-
-from ~\autocite{Raiaan2024ARO}:
-pre-training on large corpora from the web -> learning complicated patterns and language subtleties
-fine-tuning on downstream tasks gives state-of-the-art performance
-"comprehend, produce, forecast human language"
-
-From ~\autocite{Hadi_2023}:
-during pre-training: models see diverse texts and learn grammar, facts, reasoning
-
-from~\autocite{bhatia2023tart}:
-impressive results but usually still outperformed by fine-tuning
-
+% TODO
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{images/languagemodels}
     \caption[TODO.]{TODO~\autocite{zhao2023survey}}
     \label{fig:language-models}
 \end{figure}
-\section{Deep Neural Networks}\label{sec:dnn}
+
+%With the introduction of the transformer architecture in 2017~\autocite{vaswani2023attention}
+%task-agnostic representations -> less human feature engineering~\autocite{zhao2023survey}
+
+%from~\autocite{zhao2023survey}:
+%language modeling to task solving
+
+%from ~\autocite{Raiaan2024ARO}:
+%pre-training on large corpora from the web -> learning complicated patterns and language subtleties
+%fine-tuning on downstream tasks gives state-of-the-art performance
+%"comprehend, produce, forecast human language"
+
+%From ~\autocite{Hadi_2023}:
+%during pre-training: models see diverse texts and learn grammar, facts, reasoning
+
+\section{Neural Networks}\label{sec:dnn}
+
+from~\autocite{sonnet2022NeuralBoook}:
+origin of neural networks
+perceptron -> multiple layers motivated by XOR problem
+The term \enquote{Deep Learning} was first used in book in 2000
+examples for uses: optical character recognition, \enquote{AlphaGo} beating the best Go Player in the world, biology
+
+
+from~\autocite{Goodfellow-et-al-2016}
+what is a feature (page 18) -> feature engineering difficult
+\enquote{respresentation learning} -> not only mapping but also learning features
+often better than hand selected features
+
+factors of variation make learning difficult (e.g. recognizing a car in an image -> different angles)
+
 
 \subsection{Multi Layer Perceptron}\label{subsec:multi-layer-perceptron}
+from~\autocite{Goodfellow-et-al-2016}:
+MLP oder feedforward network
+mathematical function that maps set of inputs values to set of output values
+composed of many simpler function
+
+each mathematical function outputs new representation of input
+
+nesting of concepts in layers of network
+
+deep learning: models that involve \enquote{greater amount of  composition of learned functions}
+
+type of machine learning: learns by experiencing data
+more available data -> Deep Learning more useful
+
+neural networks originally used to mimic human brain (ANN)
+not a realistic model of human brain
+
+earliest idea simple linear models that take set of $n$ input values $x_1, \dots x_n$ and map them to output $y$
+linear combination with model parameters $w_1, \dots, w_n$
+model parameters learnable
+model \[
+          f(\boldsymbol{x}, \boldsymbol{w}) = x_1 w_1 + \dots + x_n w_n
+\]
+
+model is hyper plane in normal form -> can divide the space and be used to classify inputs
+(sign of dot product shows which side of the plane) % TODO: quelle
+
+linear model not able to learn XOR function
+
+deep learning incorporates many elements from different fields (mostly applied mathematics): linear algebra, probability theory, numerical optimization, information theory
+
+movement in the 1980s: \enquote{connectionnism}:
+large number of simple computational units -> intelligent behaviour
+
+concept of distributed representation:
+3 subjects, 3 colors -> model should recognize all 9 combinations
+possible with 9 neurons that each learn to identify one combination
+better: 3 neurons describe color and 3 the type of object (concatenation? intermediate representation)
+
+1980: back-propagation
+1990s: advances in Sequence modeling -> LSTM
+
+over time: more data examples, bigger model size (driven by greater computational resources)
+
+% TODO: coole Abbildung auf Seite 25
+
+
+\subsection{Deep Neural Networks}\label{subsec:deep-neural-networks}
 
 \subsection{Learning from Data (Gradient Descent)}\label{subsec:learning-from-data}
 % Mathematical Optimization
+Deep Learning usually involves mathematical optimization meaning the task of minimizing or maximizing some function $f(x, \boldsymbol{w})$ by altering the parameters $\boldsymbol{w}$
+maximizing equal to minimizing -f
 
 \subsubsection{Loss Functions}
 
