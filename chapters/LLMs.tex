@@ -85,6 +85,37 @@ In the following sections the underlying workings of \glspl{nlm}, \glspl{plm} an
 %From ~\autocite{Hadi_2023}:
 %during pre-training: models see diverse texts and learn grammar, facts, reasoning
 
+\clearpage
+
+\section{Deep Learning}\label{sec:deep-learning}
+As previously mentioned, \glspl{dnn} are the underlying technology for modern language models.
+\glspl{dnn} belong to the field \enquote{Deep Learning} which is a specific type of \gls{ml}.
+The term \acrlong{ml} describes different computational methods that can learn to perform different tasks from experiencing data~\autocite{Goodfellow-et-al-2016}.
+
+A typical application for \gls{ml} is to learn some task that can be represented by a mapping:
+\[
+    f: \mathcal{X} \rightarrow \mathcal{Y}
+\]
+The \textit{input space} $\mathcal{X}$ is the set of all possible \textit{examples}.
+Each example is mapped to a \textit{label} or \textit{target value} from the \textit{target space} $\mathcal{Y}$.
+Input spaces often consist of real vectors $\boldsymbol{x} \in \mathbb{R}^n$.
+The entries $x_i$ of an example vector are called \textit{features}.
+%How these sets look specifically depends on the type of task that is learned.
+
+\gls{ml} can be applied to many different tasks like \textit{classification} and \textit{regression}.
+For classification, the desired function assigns an integer representing a category to each possible input example.
+An example for this is the categorization of images.
+An automatic image classifier $f:\mathbb{R}^n \rightarrow \{1,\dots,k\}$ receives an image (usually in the form of a real vector) and outputs a numerical value that symbolizes the content of that image e.g.\ a person, an object or an animal.
+
+
+
+
+
+%\gls{ml} makes it possible to find a classification function $f:\mathbb{R}^n \rightarrow \{1,\dots,k\}$ that assigns an integer representing a category to each possible input vector.
+
+\subsection{Supervised Learning}\label{subsec:supervised-learning}
+
+
 \section{Neural Networks}\label{sec:dnn}
 
 from~\autocite{sonnet2022NeuralBoook}:
@@ -156,6 +187,11 @@ over time: more data examples, bigger model size (driven by greater computationa
 % Mathematical Optimization
 Deep Learning usually involves mathematical optimization meaning the task of minimizing or maximizing some function $f(x, \boldsymbol{w})$ by altering the parameters $\boldsymbol{w}$
 maximizing equal to minimizing -f
+
+the function to optimize is called \enquote{objective function}
+when minimizing: \enquote{cost function}, \enquote{loss function} or \enquote{error function}
+
+universal approximation theorem
 
 \subsubsection{Loss Functions}
 
