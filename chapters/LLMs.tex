@@ -92,7 +92,7 @@ As previously mentioned, \glspl{dnn} are the underlying technology for modern la
 \glspl{dnn} belong to the field \enquote{Deep Learning} which is a specific type of \gls{ml}.
 The term \acrlong{ml} describes different computational methods that can learn to perform different tasks from experiencing data~\autocite{Goodfellow-et-al-2016}.
 
-A typical application for \gls{ml} is to learn some task that can be represented by a mapping:
+A typical application for \gls{ml} is to learn a task that can be represented by a mapping:
 \[
     f: \mathcal{X} \rightarrow \mathcal{Y}
 \]
@@ -100,20 +100,26 @@ The \textit{input space} $\mathcal{X}$ is the set of all possible \textit{exampl
 Each example is mapped to a \textit{label} or \textit{target value} from the \textit{target space} $\mathcal{Y}$.
 Input spaces often consist of real vectors $\boldsymbol{x} \in \mathbb{R}^n$.
 The entries $x_i$ of an example vector are called \textit{features}.
-%How these sets look specifically depends on the type of task that is learned.
+Target spaces vary depending on the specific task.
+Typical are subsets of natural numbers for \textit{classifications} or real numbers (e.g.\ for \textit{regression}).
 
-\gls{ml} can be applied to many different tasks like \textit{classification} and \textit{regression}.
-For classification, the desired function assigns an integer representing a category to each possible input example.
-An example for this is the categorization of images.
+For classification tasks, the learned function assigns an integer representing a category to each possible input example.
+A common use case for this is the categorization of images.
 An automatic image classifier $f:\mathbb{R}^n \rightarrow \{1,\dots,k\}$ receives an image (usually in the form of a real vector) and outputs a numerical value that symbolizes the content of that image e.g.\ a person, an object or an animal.
 
+\gls{ml} offers a broad range of methods to find functions that can model complex behavior.
+They incorporate many elements from different fields like linear algebra, probability theory, numerical optimization and information theory~\autocite{Goodfellow-et-al-2016}.
+\gls{ml} has been successfully applied to numerous problems from different domains, including text classification, \gls{nlp}, speech processing applications, computer vision and computational biology applications.
+\gls{ml}-approaches are usually categorized into the different learning scenarios \textit{supervised learning}, \textit{unsupervised learning} and \textit{semi-supervised learning}.
+These scenarios differ in the usage and type of available training data~\autocite{mohri2018foundations}.
+Supervised learning is especially relevant for machine translation tasks like \gls{ats}.
 
-
+%\gls{ml} algorithms can learn mapping from data
 
 
 %\gls{ml} makes it possible to find a classification function $f:\mathbb{R}^n \rightarrow \{1,\dots,k\}$ that assigns an integer representing a category to each possible input vector.
 
-\subsection{Supervised Learning}\label{subsec:supervised-learning}
+\subsection{ Learning}\label{subsec:supervised-learning}
 
 
 \section{Neural Networks}\label{sec:dnn}
