@@ -114,12 +114,47 @@ They incorporate many elements from different fields like linear algebra, probab
 These scenarios differ in the usage and type of available training data~\autocite{mohri2018foundations}.
 Supervised learning is especially relevant for machine translation tasks like \gls{ats}.
 
-%\gls{ml} algorithms can learn mapping from data
+
+\subsection{Supervised Learning}\label{subsec:supervised-learning}
+In the setting of supervised learning, available training data consists of pairs of input examples with corresponding target values.
+\[
+    D = \{(x_1, y_1), \dots, (x_m, y_m)\}
+\]
+The general aim is to model the relation between the examples $x_i$ and the targets $y_i$.
+For that, assumptions about the origin of the data have to be made.
+It is commonly assumed that the pairs $(x_i, y_i)$ are sampled from an unknown probability distribution, i.e.\ they are realizations of random variables $Z_i = (X_i, Y_i)$ that take values in $\mathcal{X} \times \mathcal{Y}$.
+The random variables $\{(X_1, Y_1) \dots (X_m, Y_m)\}$ are independently and identically distributed (i.i.d.) while $X_i$ and $Y_i$ are not necessarily independent~\autocite{gressmann2019probabilistic}.
+In the context of \gls{ml} this is often denoted as $(x_i,y_i) \sim P(X, Y)$ where $P(X, Y)$ signifies the joint probability distribution (e.g.\ \textcite{Goodfellow-et-al-2016}).
+
+In the setting of \enquote{classical} supervised learning, the objective is to learn a deterministic prediction function $f: \mathcal{X} \rightarrow \mathcal{Y}$ that defines a mapping between examples and targets:
+\[
+    \forall \, (X^*, Y^*) \sim P(X, Y): \quad  Y^* = f(X^*)
+\]
+To approximate this mapping, a set of potential prediction functions $\mathcal{H}$ is considered.
+% TODO example
+The learning algorithm consists of choosing the hypothesis $h \in \mathcal{H}$ that is closest to the unknown prediction function $f$, i.e.\ $h(X^*) \approx f(X^*) = Y^*$.
+In order to quantify the mathematical distance between predictions, a loss function $L: \mathcal{Y} \times \mathcal{Y} \rightarrow \mathbb{R}$ is used.
 
 
-%\gls{ml} makes it possible to find a classification function $f:\mathbb{R}^n \rightarrow \{1,\dots,k\}$ that assigns an integer representing a category to each possible input vector.
 
-\subsection{ Learning}\label{subsec:supervised-learning}
+%\enquote{cost function}, \enquote{loss function} or \enquote{error function}
+
+
+%In literature, definitions for this can vary depending on the specific learning method and the context.
+%\begin{itemize}
+%    \item The examples $x_i$ are sampled from an unknown probability distribution $P(x)$ (denoted by its probability measure $P$).
+%    The relation to the targets $y_i$ is given by a deterministic function $f: \mathcal{X} \rightarrow \mathcal{Y}$ that describes the training data $y_i = f(x_i)$.
+%\end{itemize}
+
+%Modeling the relation be
+%
+%There is no universal definition for supervised learning.
+%Different approaches make different assumptions about
+%
+%mapping from x to y either stochastic or deterministic (goodfellow)
+
+
+%\autocite{gressmann2019probabilistic}
 
 
 \section{Neural Networks}\label{sec:dnn}
@@ -169,7 +204,6 @@ model is hyper plane in normal form -> can divide the space and be used to class
 
 linear model not able to learn XOR function
 
-deep learning incorporates many elements from different fields (mostly applied mathematics): linear algebra, probability theory, numerical optimization, information theory
 
 movement in the 1980s: \enquote{connectionnism}:
 large number of simple computational units -> intelligent behaviour
