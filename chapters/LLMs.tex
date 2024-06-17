@@ -87,6 +87,7 @@ In the following sections the underlying workings of \glspl{nlm}, \glspl{plm} an
 
 \clearpage
 
+
 \section{Deep Learning}\label{sec:deep-learning}
 As previously mentioned, \glspl{dnn} are the underlying technology for modern language models.
 \glspl{dnn} belong to the field \enquote{Deep Learning} which is a specific type of \gls{ml}.
@@ -114,7 +115,6 @@ They incorporate many elements from different fields like linear algebra, probab
 These scenarios differ in the usage and type of available training data~\autocite{mohri2018foundations}.
 Supervised learning is especially relevant for machine translation tasks like \gls{ats}.
 
-
 \subsection{Supervised Learning}\label{subsec:supervised-learning}
 In the setting of supervised learning, available training data consists of pairs of input examples with corresponding target values.
 \[
@@ -137,7 +137,7 @@ In order to quantify the mathematical distance between predictions, a \textit{lo
 If $\mathcal{Y} = \mathbb{R}$ (e.g.\ for a regression) the \textit{least squares loss} $L_{sq} (\hat{y}, y) = (\hat{y} - y)^2$ is common~\autocite{gressmann2019probabilistic}.
 The ideal hypothesis $h^*$ minimizes the expected generalization error (sometimes called \textit{risk})
 \[
-h^* = \underset{{h \in \mathcal{H}}}{\operatorname{argmin}} \mathbb{E}[L(h(X^*), Y^*)]
+    h^* = \underset{{h \in \mathcal{H}}}{\operatorname{argmin}} \mathbb{E}[L(h(X^*), Y^*)]
 \]
 Because the underlying data distribution $P(X, Y)$ is unknown, this optimization problem is not solvable.
 Instead, the observed training data $D$ is used to minimize an approximation of the risk, i.e\ the \textit{empirical risk}:
@@ -153,13 +153,18 @@ The estimate indicates how well the chosen hypothesis $\hat{h}$ performs on unse
 While learning a direct mapping from $\mathcal{X}$ to $\mathcal{Y}$ can be adequate to model some tasks, many supervised learning algorithms estimate a conditional probability distribution $P(Y | X)$ instead.
 This way, the model can consider the \textit{aspect of uncertainty} that is present in many real world applications for \gls{ml}.
 In this scenario, the desired prediction function maps input examples to a distribution over the target space $f: \mathcal{X} \rightarrow \operatorname{Distr}(\mathcal{Y})$.
-For a classification task, this output distribution could be a categorical distribution over all class labels, i.e.\ a discrete distribution that for a given example $x$ assigns each class a probability signifying a degree of belief.
+To evaluate predictions, an appropriate loss function $L: \operatorname{Distr}(\mathcal{Y}) \times \mathcal{Y} \rightarrow \mathbb{R}$ is necessary.
+For a classification task, the output distribution could be a categorical distribution over all class labels, i.e.\ a discrete distribution that for a given example $x$ assigns each class a probability signifying a degree of belief~\autocite{Goodfellow-et-al-2016}.
+This type of prediction function can easily be modified to mimic the behavior of the \enquote{classical} prediction function:
+\[
+    g(x) =\underset{y \in \mathcal{Y}}{\operatorname{argmax}} [f(x)](y) \approx \underset{y \in \mathcal{Y}}{\operatorname{argmax}} P(Y=y|X=x)
+\]
+
 
 %surrogate
 %
 %batches, not calculating complete loss
 % no global minimum
-
 
 
 %\enquote{cost function}, \enquote{loss function} or \enquote{error function}
@@ -196,7 +201,6 @@ often better than hand selected features
 
 factors of variation make learning difficult (e.g. recognizing a car in an image -> different angles)
 
-
 \subsection{Multi Layer Perceptron}\label{subsec:multi-layer-perceptron}
 from~\autocite{Goodfellow-et-al-2016}:
 MLP oder feedforward network
@@ -207,7 +211,7 @@ each mathematical function outputs new representation of input
 
 nesting of concepts in layers of network
 
-deep learning: models that involve \enquote{greater amount of  composition of learned functions}
+deep learning: models that involve \enquote{greater amount of composition of learned functions}
 
 type of machine learning: learns by experiencing data
 more available data -> Deep Learning more useful
@@ -243,7 +247,6 @@ over time: more data examples, bigger model size (driven by greater computationa
 
 % TODO: coole Abbildung auf Seite 25
 
-
 \subsection{Deep Neural Networks}\label{subsec:deep-neural-networks}
 
 \subsection{Learning from Data (Gradient Descent)}\label{subsec:learning-from-data}
@@ -260,7 +263,9 @@ universal approximation theorem
 
 \subsubsection{Backpropagation}
 
+
 \section{Transformers}\label{sec:trans}
+
 
 \section{Decoder-only Models}\label{sec:decoder}
 
@@ -270,12 +275,16 @@ universal approximation theorem
 
 \subsubsection{Leo}
 
+
 \section{Supervised Fine-Tuning (SFT)}\label{sec:supervised-fine-tuning}
+
 
 \section{Alignment Methods}\label{sec:alignment-methods}
 from~\autocite{zhao2023survey}:
 capture properties of training corpus
 
 \subsection{RLHF}\label{subsec:rlhf}
+
 \subsection{PPO}\label{subsec:ppo}
+
 \subsection{DPO}\label{subsec:dpo}
