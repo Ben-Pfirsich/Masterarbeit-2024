@@ -123,17 +123,37 @@ In the setting of supervised learning, available training data consists of pairs
 The general aim is to model the relation between the examples $x_i$ and the targets $y_i$.
 For that, assumptions about the origin of the data have to be made.
 It is commonly assumed that the pairs $(x_i, y_i)$ are sampled from an unknown probability distribution, i.e.\ they are realizations of random variables $Z_i = (X_i, Y_i)$ that take values in $\mathcal{X} \times \mathcal{Y}$.
-The random variables $\{(X_1, Y_1) \dots (X_m, Y_m)\}$ are independently and identically distributed (i.i.d.) while $X_i$ and $Y_i$ are not necessarily independent~\autocite{gressmann2019probabilistic}.
-In the context of \gls{ml} this is often denoted as $(x_i,y_i) \sim P(X, Y)$ where $P(X, Y)$ signifies the joint probability distribution (e.g.\ \textcite{Goodfellow-et-al-2016}).
+The random variables $\{(X_1, Y_1), \dots ,(X_m, Y_m)\}$ are independently and identically distributed (i.i.d.) while $X_i$ and $Y_i$ are not necessarily independent~\autocite{gressmann2019probabilistic}.
+In the context of \gls{ml} this is often denoted as $(X_i,Y_i) \sim P(X, Y)$ where $P(X, Y)$ signifies the joint probability distribution (e.g.\ \textcite{Goodfellow-et-al-2016}).
 
 In the setting of \enquote{classical} supervised learning, the objective is to learn a deterministic prediction function $f: \mathcal{X} \rightarrow \mathcal{Y}$ that defines a mapping between examples and targets:
 \[
-    \forall \, (X^*, Y^*) \sim P(X, Y): \quad  Y^* = f(X^*)
+    \, (X^*, Y^*) \sim P(X, Y): \quad  Y^* = f(X^*)
 \]
 To approximate this mapping, a set of potential prediction functions $\mathcal{H}$ is considered.
 % TODO example
 The learning algorithm consists of choosing the hypothesis $h \in \mathcal{H}$ that is closest to the unknown prediction function $f$, i.e.\ $h(X^*) \approx f(X^*) = Y^*$.
-In order to quantify the mathematical distance between predictions, a loss function $L: \mathcal{Y} \times \mathcal{Y} \rightarrow \mathbb{R}$ is used.
+In order to quantify the mathematical distance between predictions, a \textit{loss function} (sometimes called \textit{cost function} or \textit{error function}) $L: \mathcal{Y} \times \mathcal{Y} \rightarrow \mathbb{R}$ is used.
+If $\mathcal{Y} = \mathbb{R}$ (e.g.\ for a regression) the \textit{least squares loss} $L_{sq} (\hat{y}, y) = (\hat{y} - y)^2$ is common~\autocite{gressmann2019probabilistic}.
+The ideal hypothesis $h^*$ minimizes the expected generalization error (sometimes called \textit{risk})
+\[
+h^* = \underset{{h \in \mathcal{H}}}{\mathrm{argmin}} \, \mathbb{E}[L(h(X^*), Y^*)]
+\]
+Because the underlying data distribution $P(X, Y)$ is unknown, this optimization problem is not solvable.
+Instead, the observed training data $D$ is used to minimize an approximation of the risk, i.e\ the \textit{empirical risk}:
+\[
+    \hat{h} = \underset{{h \in \mathcal{H}}}{\mathrm{argmin}} \, \frac{1}{m}\sum_{i=1}^{m} L(h(x_i), y_i)
+\]
+This approach may lead to \textit{overfitting}, meaning the determined hypothesis $\hat{h}$ accurately describes the training data $D$ but does not generalize well on unseen data.
+There are several methods to prevent this like regulating the complexity and capacity of functions included in $\mathcal{H}$ or using a larger dataset with more training examples.
+By setting aside a small subset of the training data as \textit{test data} which is not used in the optimization process, it is possible to estimate generalization error.
+This is again done with the empirical quantity specified above.
+The estimate indicates how well the chosen hypothesis $\hat{h}$ performs on unseen data.
+
+%probabilistic method
+%surrogate
+%
+%batches, not calculating complete loss
 
 
 
@@ -146,10 +166,8 @@ In order to quantify the mathematical distance between predictions, a loss funct
 %    The relation to the targets $y_i$ is given by a deterministic function $f: \mathcal{X} \rightarrow \mathcal{Y}$ that describes the training data $y_i = f(x_i)$.
 %\end{itemize}
 
-%Modeling the relation be
 %
 %There is no universal definition for supervised learning.
-%Different approaches make different assumptions about
 %
 %mapping from x to y either stochastic or deterministic (goodfellow)
 
