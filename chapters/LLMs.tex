@@ -137,23 +137,28 @@ In order to quantify the mathematical distance between predictions, a \textit{lo
 If $\mathcal{Y} = \mathbb{R}$ (e.g.\ for a regression) the \textit{least squares loss} $L_{sq} (\hat{y}, y) = (\hat{y} - y)^2$ is common~\autocite{gressmann2019probabilistic}.
 The ideal hypothesis $h^*$ minimizes the expected generalization error (sometimes called \textit{risk})
 \[
-h^* = \underset{{h \in \mathcal{H}}}{\mathrm{argmin}} \, \mathbb{E}[L(h(X^*), Y^*)]
+h^* = \underset{{h \in \mathcal{H}}}{\operatorname{argmin}} \mathbb{E}[L(h(X^*), Y^*)]
 \]
 Because the underlying data distribution $P(X, Y)$ is unknown, this optimization problem is not solvable.
 Instead, the observed training data $D$ is used to minimize an approximation of the risk, i.e\ the \textit{empirical risk}:
 \[
-    \hat{h} = \underset{{h \in \mathcal{H}}}{\mathrm{argmin}} \, \frac{1}{m}\sum_{i=1}^{m} L(h(x_i), y_i)
+    \hat{h} = \underset{{h \in \mathcal{H}}}{\operatorname{argmin}} \frac{1}{m}\sum_{i=1}^{m} L(h(x_i), y_i)
 \]
 This approach may lead to \textit{overfitting}, meaning the determined hypothesis $\hat{h}$ accurately describes the training data $D$ but does not generalize well on unseen data.
 There are several methods to prevent this like regulating the complexity and capacity of functions included in $\mathcal{H}$ or using a larger dataset with more training examples.
-By setting aside a small subset of the training data as \textit{test data} which is not used in the optimization process, it is possible to estimate generalization error.
+By setting aside a small subset of the training data as \textit{test data} which is not used in the optimization process, it is possible to estimate the generalization error.
 This is again done with the empirical quantity specified above.
 The estimate indicates how well the chosen hypothesis $\hat{h}$ performs on unseen data.
 
-%probabilistic method
+While learning a direct mapping from $\mathcal{X}$ to $\mathcal{Y}$ can be adequate to model some tasks, many supervised learning algorithms estimate a conditional probability distribution $P(Y | X)$ instead.
+This way, the model can consider the \textit{aspect of uncertainty} that is present in many real world applications for \gls{ml}.
+In this scenario, the desired prediction function maps input examples to a distribution over the target space $f: \mathcal{X} \rightarrow \operatorname{Distr}(\mathcal{Y})$.
+For a classification task, this output distribution could be a categorical distribution over all class labels, i.e.\ a discrete distribution that for a given example $x$ assigns each class a probability signifying a degree of belief.
+
 %surrogate
 %
 %batches, not calculating complete loss
+% no global minimum
 
 
 
