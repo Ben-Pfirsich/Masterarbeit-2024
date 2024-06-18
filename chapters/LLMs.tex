@@ -137,12 +137,12 @@ In order to quantify the mathematical distance between predictions, a \textit{lo
 If $\mathcal{Y} = \mathbb{R}$ (e.g.\ for a regression) the \textit{least squares loss} $L_{sq} (\hat{y}, y) = (\hat{y} - y)^2$ is common~\autocite{gressmann2019probabilistic}.
 The ideal hypothesis $h^*$ minimizes the expected generalization error (sometimes called \textit{risk})
 \[
-    h^* = \underset{{h \in \mathcal{H}}}{\operatorname{argmin}} \mathbb{E}[L(h(X^*), Y^*)]
+    h^* = \underset{{h \in \mathcal{H}}}{\operatorname{argmin}} \, \mathbb{E}[L(h(X^*), Y^*)]
 \]
 Because the underlying data distribution $P(X, Y)$ is unknown, this optimization problem is not solvable.
 Instead, the observed training data $D$ is used to minimize an approximation of the risk, i.e\ the \textit{empirical risk}:
 \[
-    \hat{h} = \underset{{h \in \mathcal{H}}}{\operatorname{argmin}} \frac{1}{m}\sum_{i=1}^{m} L(h(x_i), y_i)
+    \hat{h} = \underset{{h \in \mathcal{H}}}{\operatorname{argmin}} \, \frac{1}{m}\sum_{i=1}^{m} L(h(x_i), y_i)
 \]
 This approach may lead to \textit{overfitting}, meaning the determined hypothesis $\hat{h}$ accurately describes the training data $D$ but does not generalize well on unseen data.
 There are several methods to prevent this like regulating the complexity and capacity of functions included in $\mathcal{H}$ or using a larger dataset with more training examples.
@@ -160,29 +160,36 @@ This type of prediction function can easily be modified to mimic the behavior of
     g(x) =\underset{y \in \mathcal{Y}}{\operatorname{argmax}} [f(x)](y) \approx \underset{y \in \mathcal{Y}}{\operatorname{argmax}} P(Y=y|X=x)
 \]
 
+\subsection{Learning from Data (Gradient Descent)}\label{subsec:learning-from-data}
+Depending on the type of assumed hypothesis functions, different methods from the field of \enquote{mathematical optimization} can be used to minimize the empirical risk.
+It is typical to consider a set of functions $\{h(\,\cdot\, ; \boldsymbol{\theta}) \mid \boldsymbol{\theta} \in \Theta \}$ as the hypothesis space $\mathcal{H}$ where $\boldsymbol{\theta}$ represents free, learnable parameters that can be adjusted so the prediction function $h$ can accurately fit the data $D$.
+The parameter space $\Theta$ is often chosen as $\mathbb{R}^n$ meaning the function is parameterized by a vector of real numbers.
+A simple example for such a set of functions is the linear combination $h(\boldsymbol{x}, \boldsymbol{\theta}) = x_1\theta_1 + \dots + x_n\theta_n$.
+
+The empirical risk can then be formulated as a function in \boldsymbol{\theta}:
+\[
+    \mathcal{L}(\boldsymbol{\theta}) = \frac{1}{m}\sum_{i=1}^{m} L(h(x_i, \boldsymbol{\theta}), y_i)
+\]
+Finding the hypothesis $\hat{h}$ that most accurately describes the training data can now be solved by minimizing \mathcal{L}(\boldsymbol{\theta}) with respect to \boldsymbol{\theta}.
+Assuming that \boldsymbol{\theta} is a vector, a minimum needs to satisfy the condition
+\[
+    \nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta}) = 0
+\]
+
+
+%Deep Learning usually involves mathematical optimization meaning the task of minimizing or maximizing some function $f(x, \boldsymbol{w})$ by altering the parameters $\boldsymbol{w}$
+%maximizing equal to minimizing -f
+%
+%the function to optimize is called \enquote{objective function}
 
 %surrogate
 %
 %batches, not calculating complete loss
 % no global minimum
 
-
-%\enquote{cost function}, \enquote{loss function} or \enquote{error function}
-
-
-%In literature, definitions for this can vary depending on the specific learning method and the context.
-%\begin{itemize}
-%    \item The examples $x_i$ are sampled from an unknown probability distribution $P(x)$ (denoted by its probability measure $P$).
-%    The relation to the targets $y_i$ is given by a deterministic function $f: \mathcal{X} \rightarrow \mathcal{Y}$ that describes the training data $y_i = f(x_i)$.
-%\end{itemize}
-
-%
-%There is no universal definition for supervised learning.
-%
-%mapping from x to y either stochastic or deterministic (goodfellow)
+% calculating complete loss can be expensive
 
 
-%\autocite{gressmann2019probabilistic}
 
 
 \section{Neural Networks}\label{sec:dnn}
@@ -247,15 +254,6 @@ over time: more data examples, bigger model size (driven by greater computationa
 
 % TODO: coole Abbildung auf Seite 25
 
-\subsection{Deep Neural Networks}\label{subsec:deep-neural-networks}
-
-\subsection{Learning from Data (Gradient Descent)}\label{subsec:learning-from-data}
-% Mathematical Optimization
-Deep Learning usually involves mathematical optimization meaning the task of minimizing or maximizing some function $f(x, \boldsymbol{w})$ by altering the parameters $\boldsymbol{w}$
-maximizing equal to minimizing -f
-
-the function to optimize is called \enquote{objective function}
-when minimizing: \enquote{cost function}, \enquote{loss function} or \enquote{error function}
 
 universal approximation theorem
 
