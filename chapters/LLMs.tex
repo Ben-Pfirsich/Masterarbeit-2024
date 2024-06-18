@@ -166,16 +166,32 @@ It is typical to consider a set of functions $\{h(\,\cdot\, ; \boldsymbol{\theta
 The parameter space $\Theta$ is often chosen as $\mathbb{R}^n$ meaning the function is parameterized by a vector of real numbers.
 A simple example for such a set of functions is the linear combination $h(\boldsymbol{x}, \boldsymbol{\theta}) = x_1\theta_1 + \dots + x_n\theta_n$.
 
-The empirical risk can then be formulated as a function in \boldsymbol{\theta}:
+The empirical risk can then be formulated as a function $\mathcal{L}: \Theta \rightarrow \mathbb{R}$:
 \[
     \mathcal{L}(\boldsymbol{\theta}) = \frac{1}{m}\sum_{i=1}^{m} L(h(x_i, \boldsymbol{\theta}), y_i)
 \]
-Finding the hypothesis $\hat{h}$ that most accurately describes the training data can now be solved by minimizing \mathcal{L}(\boldsymbol{\theta}) with respect to \boldsymbol{\theta}.
-Assuming that \boldsymbol{\theta} is a vector, a minimum needs to satisfy the condition
+Finding the hypothesis $\hat{h}$ that most accurately describes the training data can now be solved by minimizing $\mathcal{L}(\boldsymbol{\theta})$ with respect to \boldsymbol{\theta}.
+Assuming that \boldsymbol{\theta} is a vector, a minimum needs to satisfy the condition of stationary ($\nabla$ referring to the gradient i.e.\ a vector of partial derivatives)
 \[
-    \nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta}) = 0
+    [\nabla\mathcal{L}](\boldsymbol{\theta}) = 0
 \]
+For very complex hypothesis functions, this is usually not directly solvable.
+Moreover, to guarantee that a stationary point is indeed a minimum and not a maximum or saddle point, additional conditions need to be met.
+Iterative solvers are a popular solution for this kind of optimization problem.
 
+The gradient $[\nabla\mathcal{L}](\boldsymbol{\theta})$ describes how the value of the function $\mathcal{L}$ reacts to slight changes in the input $\boldsymbol{\theta}$.
+Evaluating the gradient in any point $\boldsymbol{\theta} \in \Theta$ returns a vector in the parameter space $\Theta$ that points in the direction that causes the steepest ascent to $\mathcal{L}$.
+Likewise, the opposite direction of that vector aligns with the direction of the steepest descent.
+With this intuition, it becomes obvious that for small enough $\epsilon$ the following inequality holds:
+\[
+    \mathcal{L}(\boldsymbol{\theta}) > \mathcal{L}(\boldsymbol{\theta} - \epsilon\,[\nabla\mathcal{L}](\boldsymbol{\theta}))
+\]
+This motivates the iterative method called \enquote{gradient descent} or \enquote{steepest descent}:
+\begin{itemize}[noitemsep]
+    \item randomly initialize $\boldsymbol{\theta_0}$
+    \item iteratively calculate $\boldsymbol{\theta_{i+1}} = \boldsymbol{\theta_{i}} + \epsilon\,[\nabla\mathcal{L}](\boldsymbol{\theta_{i}})$
+    \item terminate when all elements of the gradient are equal or close to zero
+\end{itemize}
 
 %Deep Learning usually involves mathematical optimization meaning the task of minimizing or maximizing some function $f(x, \boldsymbol{w})$ by altering the parameters $\boldsymbol{w}$
 %maximizing equal to minimizing -f
@@ -188,8 +204,6 @@ Assuming that \boldsymbol{\theta} is a vector, a minimum needs to satisfy the co
 % no global minimum
 
 % calculating complete loss can be expensive
-
-
 
 
 \section{Neural Networks}\label{sec:dnn}
