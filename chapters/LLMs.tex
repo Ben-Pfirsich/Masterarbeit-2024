@@ -180,30 +180,50 @@ Moreover, to guarantee that a stationary point is indeed a minimum and not a max
 Iterative solvers are a popular solution for this kind of optimization problem.
 
 The gradient $[\nabla\mathcal{L}](\boldsymbol{\theta})$ describes how the value of the function $\mathcal{L}$ reacts to slight changes in the input $\boldsymbol{\theta}$.
-Evaluating the gradient in any point $\boldsymbol{\theta} \in \Theta$ returns a vector in the parameter space $\Theta$ that points in the direction that causes the steepest ascent to $\mathcal{L}$.
+Evaluating the gradient in any point $\boldsymbol{\theta} \in \Theta$ returns a vector in the parameter space $\Theta$ that points in the direction that results in the steepest ascent in $\mathcal{L}$.
 Likewise, the opposite direction of that vector aligns with the direction of the steepest descent.
 With this intuition, it becomes obvious that for small enough $\epsilon$ the following inequality holds:
 \[
     \mathcal{L}(\boldsymbol{\theta}) > \mathcal{L}(\boldsymbol{\theta} - \epsilon\,[\nabla\mathcal{L}](\boldsymbol{\theta}))
 \]
-This motivates the iterative method called \enquote{gradient descent} or \enquote{steepest descent}:
-\begin{itemize}[noitemsep]
-    \item randomly initialize $\boldsymbol{\theta_0}$
-    \item iteratively calculate $\boldsymbol{\theta_{i+1}} = \boldsymbol{\theta_{i}} + \epsilon\,[\nabla\mathcal{L}](\boldsymbol{\theta_{i}})$
-    \item terminate when all elements of the gradient are equal or close to zero
-\end{itemize}
+Hence, taking small steps in the direction of the negative gradient will lead to a local minimum or a saddle point.
+This motivates the iterative method called \enquote{gradient descent} or \enquote{steepest descent}.
+After randomly initializing $\boldsymbol{\theta_0}$ (preferably close to zero) the following update is iteratively calculated:
+\[
+    \boldsymbol{\theta_{i+1}} = \boldsymbol{\theta_{i}} + \epsilon\,[\nabla\mathcal{L}](\boldsymbol{\theta_{i}})
+\]
+The variable $\epsilon$ is called the \textit{learning rate}.
+It controls the magnitude of each update and is usually chosen to be a real number close to zero (e.g.\ 0.01). % TODO: source
+The learning rate does not have to be a fixed value.
+It can also be adaptively determined in each step, e.g.\ by optimizing for $\epsilon$ to find the step size that results in the greatest decrease in $\mathcal{L}$.
+This method is known as \enquote{line search}.
 
-%Deep Learning usually involves mathematical optimization meaning the task of minimizing or maximizing some function $f(x, \boldsymbol{w})$ by altering the parameters $\boldsymbol{w}$
-%maximizing equal to minimizing -f
+The gradient descent algorithm terminates when all elements of the gradient are equal or close to zero.
+The final value $\boldsymbol{\hat{\theta}}$ for $\boldsymbol{\theta_{i}}$ is an approximate solution to the optimization problem and can be used as the parameter for the final prediction function $\hat{h}(\,\cdot\,; \boldsymbol{\hat{\theta}})$.
+
+A necessary prerequisite for gradient descent is that the loss function is differentiable.
+This also depends on what kind of hypothesis functions are considered.
+Moreover, for non-convex functions convergence of the algorithm is not guaranteed.
+In theory, gradient descent can converge in saddle points or undesirable local minima.
+
+However, in praxis, the method has proven to reliably find low values in the loss function in reasonable time.
+Gradient methods are usually not attracted to maxima and rarely get stuck in saddle points.
+Although they almost never terminate in the global minimum, a sufficiently small local minimum can be determined more often than not.
+
+%large variety of modifications to gradient descent method
+%gradient accumulation / \enquote{Nesterov} (momentum)
+%methods with second derivative (\enquote{second order} )
 %
-%the function to optimize is called \enquote{objective function}
+%
+%computing exact gradient is slow
+%take a random subset of data points and calculate gradient of partial loss
+%partial gradient is unbiased estimate of real gradient
+%learnrate needs to be gradually decreased
+%sgd asymptotically following gradient of generalization error
+%additional benefits: less likely to overfit, better stability, regularizing effect
 
 %surrogate
-%
 %batches, not calculating complete loss
-% no global minimum
-
-% calculating complete loss can be expensive
 
 
 \section{Neural Networks}\label{sec:dnn}
