@@ -201,26 +201,30 @@ This method is known as \enquote{line search}.
 The gradient descent algorithm terminates when all elements of the gradient are equal or close to zero.
 The final value $\boldsymbol{\hat{\theta}}$ for $\boldsymbol{\theta_{i}}$ is an approximate solution to the optimization problem and can be used as the parameter for the final prediction function $\hat{h}(\,\cdot\,; \boldsymbol{\hat{\theta}})$.
 
-A necessary prerequisite for gradient descent is that the loss function is differentiable.
+A necessary prerequisite for gradient descent is that the empirical error function is differentiable.
 This also depends on what kind of hypothesis functions are considered.
 Moreover, for non-convex functions convergence of the algorithm is not guaranteed.
 In theory, gradient descent can converge in saddle points or undesirable local minima.
-
-However, in praxis, the method has proven to reliably find low values in the loss function in reasonable time.
+However, in practice, the method has proven to reliably find low values in the error function in reasonable time.
 Gradient methods are usually not attracted to maxima and rarely get stuck in saddle points.
 Although they almost never terminate in the global minimum, a sufficiently small local minimum can be determined more often than not.
 
-%large variety of modifications to gradient descent method
-%gradient accumulation / \enquote{Nesterov} (momentum)
-%methods with second derivative (\enquote{second order} )
-%
-%
-%computing exact gradient is slow
-%take a random subset of data points and calculate gradient of partial loss
+There is a large variety of modified gradient descent methods that can stabilize or accelerate the training procedure.
+Examples for this are methods that use the gradients of several previous steps to calculate the update (e.g.\ \enquote{gradient accummulation}, \enquote{Nesterov} or \enquote{momentum} ) and methods that use second derivatives (e.g.\ \enquote{Newton methods}).
+
+A very popular variation in deep learning is \gls{sgd}.
+Computing the exact gradient is slow, as it can be composed of millions of training examples.
+Increasingly large datasets lead to more expensive calculations.
+\gls{sgd} takes advantage of the fact that in the setting of supervised learning, the empirical error function is often composed of point-wise loss functions.
+By only calculating the loss on a subset $B \subset \{1,\dots,m\}$ of the training data $D$, computation cost can be greatly reduced.
+\[
+    \hat{\mathcal{L}}(\boldsymbol{\theta}) = \frac{1}{|B|}\sum_{i \in B} L(h(x_i, \boldsymbol{\theta}), y_i)
+\]
+The \textit{minibatches} $B$ are sampled randomly
 %partial gradient is unbiased estimate of real gradient
-%learnrate needs to be gradually decreased
 %sgd asymptotically following gradient of generalization error
 %additional benefits: less likely to overfit, better stability, regularizing effect
+%learnrate needs to be gradually decreased
 
 %surrogate
 %batches, not calculating complete loss
