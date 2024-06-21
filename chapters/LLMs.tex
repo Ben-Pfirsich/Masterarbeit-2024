@@ -177,16 +177,16 @@ Assuming that \boldsymbol{\theta} is a vector, a minimum needs to satisfy the co
 \]
 For very complex hypothesis functions, this is usually not directly solvable.
 Moreover, to guarantee that a stationary point is indeed a minimum and not a maximum or saddle point, additional conditions need to be met.
-Iterative solvers are a popular solution for this kind of optimization problem.
+Iterative solvers mitigate some of the aforementioned issues and are thus a popular solution for this kind of optimization problem.
 
 The gradient $[\nabla\mathcal{L}](\boldsymbol{\theta})$ describes how the value of the function $\mathcal{L}$ reacts to slight changes in the input $\boldsymbol{\theta}$.
-Evaluating the gradient in any point $\boldsymbol{\theta} \in \Theta$ returns a vector in the parameter space $\Theta$ that points in the direction that results in the steepest ascent in $\mathcal{L}$.
+Evaluating the gradient in any point $\boldsymbol{\theta} \in \Theta$ returns a vector in the parameter space $\Theta$ that points in the direction that results in the steepest ascent in the value of $\mathcal{L}$.
 Likewise, the opposite direction of that vector aligns with the direction of the steepest descent.
 With this intuition, it becomes obvious that for small enough $\epsilon$ the following inequality holds:
 \[
     \mathcal{L}(\boldsymbol{\theta}) > \mathcal{L}(\boldsymbol{\theta} - \epsilon\,[\nabla\mathcal{L}](\boldsymbol{\theta}))
 \]
-Hence, taking small steps in the direction of the negative gradient will lead to a local minimum or a saddle point.
+Hence, taking small steps in the direction of the negative gradient should eventually lead to a local minimum.
 This motivates the iterative method called \enquote{gradient descent} or \enquote{steepest descent}.
 After randomly initializing $\boldsymbol{\theta_0}$ (preferably close to zero) the following update is iteratively calculated:
 \[
@@ -202,15 +202,15 @@ The gradient descent algorithm terminates when all elements of the gradient are 
 The final value $\boldsymbol{\hat{\theta}}$ for $\boldsymbol{\theta_{i}}$ is an approximate solution to the optimization problem and can be used as the parameter for the final prediction function $\hat{h}(\,\cdot\,; \boldsymbol{\hat{\theta}})$.
 
 A necessary prerequisite for gradient descent is that the empirical error function is differentiable.
-This also depends on what kind of hypothesis functions are considered.
+This strongly depends on what kind of hypothesis functions are considered.
 Moreover, for non-convex functions convergence of the algorithm is not guaranteed.
-In theory, gradient descent can converge in saddle points or undesirable local minima.
+In theory, gradient descent can converge in saddle points or undesirable local minima, as in these critical points the gradient will be close to zero.
 However, in practice, the method has proven to reliably find low values in the error function in reasonable time.
 Gradient methods are usually not attracted to maxima and rarely get stuck in saddle points.
 Although they almost never terminate in the global minimum, a sufficiently small local minimum can be determined more often than not.
 
 There is a large variety of modified gradient descent methods that can stabilize or accelerate the training procedure.
-Examples for this are methods that use the gradients of several previous steps to calculate the update (e.g.\ \enquote{gradient accummulation}, \enquote{Nesterov} or \enquote{momentum} ) and methods that use second derivatives (e.g.\ \enquote{Newton methods}).
+Examples for this are methods that use the gradients of several previous steps to calculate the update (e.g.\ \enquote{gradient accummulation}, \enquote{Nesterov} or \enquote{momentum}) and methods that use second derivatives (e.g.\ \enquote{Newton methods}).
 
 A very popular variation in deep learning is \gls{sgd}.
 Computing the exact gradient is slow, as it can be composed of millions of training examples.
@@ -220,14 +220,13 @@ By only calculating the loss on a subset $B \subset \{1,\dots,m\}$ of the traini
 \[
     \hat{\mathcal{L}}(\boldsymbol{\theta}) = \frac{1}{|B|}\sum_{i \in B} L(h(x_i, \boldsymbol{\theta}), y_i)
 \]
-The \textit{minibatches} $B$ are sampled randomly
-%partial gradient is unbiased estimate of real gradient
-%sgd asymptotically following gradient of generalization error
-%additional benefits: less likely to overfit, better stability, regularizing effect
-%learnrate needs to be gradually decreased
-
-%surrogate
-%batches, not calculating complete loss
+The \textit{minibatches} $B$ are sampled randomly.
+As long as no examples are repeated, the gradient of the partial empirical error $\hat{\mathcal{L}}(\boldsymbol{\theta})$ is an unbiased estimate of the true generalization error's gradient.
+Furthermore, usage of small minibatch sizes can have a regularization effect.
+This makes overfitting less likely.
+While \gls{sgd} progresses fast in the early training phase, convergence is generally slower than for standard gradient descent.
+But because this faster convergence does not correspond with a faster decrease in the generalization error, \gls{sgd} with all its benefits is usually the preferred algorithm.
+For optimal convergence conditions, the learning rate for \gls{sgd} needs to be gradually decreased~\autocite{Goodfellow-et-al-2016}.
 
 
 \section{Neural Networks}\label{sec:dnn}
@@ -249,6 +248,7 @@ factors of variation make learning difficult (e.g. recognizing a car in an image
 \subsection{Multi Layer Perceptron}\label{subsec:multi-layer-perceptron}
 from~\autocite{Goodfellow-et-al-2016}:
 MLP oder feedforward network
+
 mathematical function that maps set of inputs values to set of output values
 composed of many simpler function
 
