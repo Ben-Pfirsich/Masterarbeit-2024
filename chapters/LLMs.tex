@@ -244,7 +244,7 @@ However, in neuroscience, neural networks are not considered a realistic model o
 The earliest models were based on simple linear or affine functions that take a vector $\boldsymbol{x}$ of length $n$ as an input and map them to a single output $y$~\autocite{Goodfellow-et-al-2016}.
 The learnable parameters $\boldsymbol{\theta} = (\boldsymbol{w}, b)$ are a vector $\boldsymbol{w}$ of \textit{weights} and a \textit{bias}\footnote{not refering to the statistical bias} term $b$.
 \[
-          f(\boldsymbol{x}; \boldsymbol{\theta}) = f(\boldsymbol{x}; \boldsymbol{w}, b) = x_1 w_1 + \dots + x_n w_n + b
+    f(\boldsymbol{x}; \boldsymbol{\theta}) = f(\boldsymbol{x}; \boldsymbol{w}, b) = x_1 w_1 + \dots + x_n w_n + b
 \]
 Such a model can, among other things, be used for binary classification.
 When setting $f(\boldsymbol{x}; \boldsymbol{w}, b)$ equal to zero, the equation defines a hyperplane in the input space $\mathcal{X}$ where $\boldsymbol{w}$ is the normal vector of that plane.
@@ -253,7 +253,24 @@ Evaluating $f$ in $\bodsymbol{x}$, i.e.\ calculating the dot product with $\bold
 In the case of unit vectors, the absolute value of the dot product can be understood as the distance between $\boldsymbol{x}$ and the hyperplane.
 The sign of $f(\boldsymbol{x}; \boldsymbol{w}, b)$ indicates on which side of the hyperplane the point $\boldsymbol{x}$ lies~\autocite{bishop2006}.
 
+In a similar way, the earliest predecessors of neural networks like the \enquote{McCulloch-Pitts Neuron} in the 1940s and the \enquote{perceptron} in the 1950s could categorize inputs.
+In the 1960s, major limitation of linear models led to a temporary decline of this method.
+Specifically, it was found that the models could not learn the very simple \textit{XOR} (exclusive or) function that takes two binary inputs and maps them to a single binary output as follows:
+\[
+    f([0,0], \boldsymbol{\theta}) = 0, \quad
+    f([0,1], \boldsymbol{\theta}) = 1, \quad
+    f([1,0], \boldsymbol{\theta}) = 1, \quad
+    f([1,1], \boldsymbol{\theta}) = 0
+\]
 
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/xor}
+    \caption[Limits of the linear model.]{While linear models can learn decision boundaries for \textit{linear separable} data, e.g.\ learning the \textit{logical or}-function (left), they are incapable of learning non-linear decision boundaries, e.g.\ the \textit{XOR}-function (right)~\autocite{sonnet2022NeuralBoook}.}
+    \label{fig:xor}
+\end{figure}
+
+As seen in \autoref{fig:xor}, linear models can only learn linear \textit{decision boundaries}.
 
 %model is hyper plane in normal form -> can divide the space and be used to classify inputs
 %(sign of dot product shows which side of the plane) % TODO: quelle
@@ -262,8 +279,6 @@ The sign of $f(\boldsymbol{x}; \boldsymbol{w}, b)$ indicates on which side of th
 %model parameters learnable
 %movement in the 1980s: \enquote{connectionnism}:
 %large number of simple computational units -> intelligent behaviour
-
-
 
 
 %linear model not able to learn XOR function
@@ -321,6 +336,7 @@ The sign of $f(\boldsymbol{x}; \boldsymbol{w}, b)$ indicates on which side of th
 \subsubsection{Backpropagation}
 
 \subsubsection{Loss Functions / Example Classification}
+
 
 \section{Transformers}\label{sec:trans}
 
