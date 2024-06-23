@@ -257,28 +257,35 @@ In a similar way, the earliest predecessors of neural networks like the \enquote
 In the 1960s, major limitation of linear models led to a temporary decline of this method.
 Specifically, it was found that the models could not learn the very simple \textit{XOR} (exclusive or) function that takes two binary inputs and maps them to a single binary output as follows:
 \[
-    f([0,0], \boldsymbol{\theta}) = 0, \quad
-    f([0,1], \boldsymbol{\theta}) = 1, \quad
-    f([1,0], \boldsymbol{\theta}) = 1, \quad
-    f([1,1], \boldsymbol{\theta}) = 0
+    f([0,0]; \boldsymbol{\theta}) = 0, \quad
+    f([0,1]; \boldsymbol{\theta}) = 1, \quad
+    f([1,0]; \boldsymbol{\theta}) = 1, \quad
+    f([1,1]; \boldsymbol{\theta}) = 0
 \]
-
 \begin{figure}
     \centering
     \includegraphics[width=.9\linewidth]{images/xor}
     \caption[Limits of the linear model.]{While linear models can learn decision boundaries for \textit{linear separable} data, e.g.\ learning the \textit{logical or}-function (left), they are incapable of learning non-linear decision boundaries, e.g.\ the \textit{XOR}-function (right)~\autocite{sonnet2022NeuralBoook}.}
     \label{fig:xor}
 \end{figure}
-
 As seen in \autoref{fig:xor}, linear models can only learn linear \textit{decision boundaries}.
 
-%model is hyper plane in normal form -> can divide the space and be used to classify inputs
-%(sign of dot product shows which side of the plane) % TODO: quelle
+In the 1980s, the movement of \enquote{connectionism} improved upon these initial approaches.
+The main idea of this movement is that a large number of simple computational units (i.e.\ neurons) can realize intelligent behaviour when working together.
+With this idea in mind, a possible solution for the XOR-problem is given by feeding the input in two independent linear models and combining their outputs in a third linear model.
 
-
-%model parameters learnable
+More precisely, the inputs $\boldsymbol{x} = [x_1,x_2]$ are initially mapped to an intermediate state often referred to as \enquote{hidden units}.
+\begin{align*}
+    f^{(1)}(\boldsymbol{x}; \boldsymbol{w_1}, b_1) = g(\boldsymbol{x}^T \boldsymbol{w_1} + b_{1}) = z_1 \\
+    f^{(2)}(\boldsymbol{x}; \boldsymbol{w_2}, b_2) = g(\boldsymbol{x}^T \boldsymbol{w_2} + b_{2}) = z_2 \\
+\end{align*}
+Because the composition of multiple linear functions would just collapse into another linear function, a non-linear \textit{activation function} $g$ is applied.
+A common example of this is the \textit{rectified linear unit} or \textit{ReLU} defined as $g(v) = \max\{0, v\}$.
+The hidden units are then passed to the third linear model:
+\[
+    f^{(3)}(\boldsymbol{z} = [z_1, z_2]; \boldsymbol{w_3}, b_3) = \boldsymbol{z}^T \boldsymbol{w_3} + b_{3} = y
+\]
 %movement in the 1980s: \enquote{connectionnism}:
-%large number of simple computational units -> intelligent behaviour
 
 
 %linear model not able to learn XOR function
