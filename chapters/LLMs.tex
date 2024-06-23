@@ -228,7 +228,6 @@ While \gls{sgd} progresses fast in the early training phase, convergence is gene
 But because this faster convergence does not correspond with a faster decrease in the generalization error, \gls{sgd} with all its benefits is usually the preferred algorithm.
 For optimal convergence conditions, the learning rate for \gls{sgd} needs to be gradually decreased~\autocite{Goodfellow-et-al-2016}.
 
-
 \subsection{Neural Networks}\label{subsec:dnn}
 An important part of solving tasks with \gls{ml} is the choice of the hypothesis space $\mathcal{H}$.
 Considering functions with a very high capacity (i.e.\ complex functions with many free parameters) might lead to overfitting.
@@ -237,28 +236,35 @@ Usually, the capacity needs to be in line with the complexity of the target task
 
 In deep learning, \textit{neural networks} are used as hypothesis functions.
 Neural networks are mathematical functions that are composed of many simpler functions~\autocite{Goodfellow-et-al-2016}.
-
 While the term \enquote{deep learning} is still quite new, the first approaches for neural networks can be traced back to the 1940s.
+These early neural networks were motivated by the idea to model the human brain and explored if it was possible for a mathematical function to learn intelligent behaviour.
+In this context, neural networks are referred to as \glspl{ann}.
+However, in neuroscience, neural networks are not considered a realistic model of the human brain.
+
+The earliest models were based on simple linear or affine functions that take a vector $\boldsymbol{x}$ of length $n$ as an input and map them to a single output $y$~\autocite{Goodfellow-et-al-2016}.
+The learnable parameters $\boldsymbol{\theta} = (\boldsymbol{w}, b)$ are a vector $\boldsymbol{w}$ of \textit{weights} and a \textit{bias}\footnote{not refering to the statistical bias} term $b$.
+\[
+          f(\boldsymbol{x}; \boldsymbol{\theta}) = f(\boldsymbol{x}; \boldsymbol{w}, b) = x_1 w_1 + \dots + x_n w_n + b
+\]
+Such a model can, among other things, be used for binary classification.
+When setting $f(\boldsymbol{x}; \boldsymbol{w}, b)$ equal to zero, the equation defines a hyperplane in the input space $\mathcal{X}$ where $\boldsymbol{w}$ is the normal vector of that plane.
+The hyperplane divides the input space in two regions.
+Evaluating $f$ in $\bodsymbol{x}$, i.e.\ calculating the dot product with $\boldsymbol{w}$, projects the input onto the normal vector of the plane.
+In the case of unit vectors, the absolute value of the dot product can be understood as the distance between $\boldsymbol{x}$ and the hyperplane.
+The sign of $f(\boldsymbol{x}; \boldsymbol{w}, b)$ indicates on which side of the hyperplane the point $\boldsymbol{x}$ lies~\autocite{bishop2006}.
 
 
 
-%neural networks originally used to mimic human brain (ANN)
-%not a realistic model of human brain
+%model is hyper plane in normal form -> can divide the space and be used to classify inputs
+%(sign of dot product shows which side of the plane) % TODO: quelle
 
 
+%model parameters learnable
 %movement in the 1980s: \enquote{connectionnism}:
 %large number of simple computational units -> intelligent behaviour
 
 
-%earliest idea simple linear models that take set of $n$ input values $x_1, \dots x_n$ and map them to output $y$
-%linear combination with model parameters $w_1, \dots, w_n$
-%model parameters learnable
-%model \[
-%          f(\boldsymbol{x}, \boldsymbol{w}) = x_1 w_1 + \dots + x_n w_n
-%\]
 
-%model is hyper plane in normal form -> can divide the space and be used to classify inputs
-%(sign of dot product shows which side of the plane) % TODO: quelle
 
 %linear model not able to learn XOR function
 
