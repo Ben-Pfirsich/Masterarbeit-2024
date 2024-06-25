@@ -307,38 +307,60 @@ Instead, it is common to add more hidden layers by chaining more functions:
     f(\boldsymbol{x}) = f^{(4)}(f^{(3)}(f^{(2)}(f^{(1)}(\boldsymbol{x}))))
 \]
 The number of hidden layers is called the \enquote{depth} of the network.
-This is also what the term \enquote{deep learning} refers to.
+The depth is also what the term \enquote{deep learning} refers to.
 It is not exactly defined what number of layers a neural network needs to be called \textit{deep}.
 But a \acrlong{dnn} can be generally understood as a neural network with many layers.
 
 The previously described neural network is known as a \enquote{feedforward neural network} or \gls{mlp}.
 It can be easily scaled by adding any number of layers with any number of neurons.
-A typical way of visualizing a \gls{mlp} can be seen in TODO.
-
+A typical way of visualizing a \gls{mlp} can be seen in \autoref{fig:neural-network}.
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{images/nn}
-    \caption[Visualization of a neural network.]{~\autocite{sonnet2022NeuralBoook}.}
+    \caption[Visualization of a neural network.]{Neural networks are often visualized as directed graphs. This \gls{mlp} (left) has four input neurons, one hidden layer with five neurons and three output neurons. Each hidden unit or neuron is represented by a node. The edges between neurons stand for the weights that are applied to the incoming signals. The edges between two layers are mathematically described by a single matrix $\boldsymbol{W}$ that multiplied with the previous outputs gives the inputs for the next layer~\autocite{sonnet2022NeuralBoook, Goodfellow-et-al-2016}.}
     \label{fig:neural-network}
 \end{figure}
 % \enquote{feedforward} because information flows only in one direction
 
+\glspl{dnn} like the \gls{mlp} have been successfully applied to many tasks like \textit{speech recognition}, \textit{image segmentation} and \textit{optical character recognition}.
+They incorporate little task-specific assumptions and are thus a very general approach.
+The design of \glspl{mlp} makes it possible to choose input and output dimensions freely to describe any supervised learning task.
+\glspl{mlp} handle high dimensional data (e.g.\ images) well.
+This is related to the ability of \glspl{dnn} to learn features automatically from raw input data.
+In traditional \gls{ml}-applications the features that were passed to the model as inputs were often selected by hand.
+The raw input data was processed, so only information relevant to the task remained.
+This is known as \textit{Feature Engineering}.
+Depending on the complexity of the task and data, a lot of manual effort is needed to find effective features.
+Having the model learn the features automatically is called \enquote{feature learning} or \enquote{representation learning}.
+The concept of \textit{representations} is crucial in deep learning.
 
-%very successfull in speech recognition, image recognition, image segmentation, optical character recognition
-% more recently: language modeling
-
-% strength: not needing task-specific assumptions -> very general
-% good with high dimensional data
-%
-%what is a feature (page 18) -> feature engineering difficult
-%\enquote{respresentation learning} -> not only mapping but also learning features
 %often better than hand selected features
+
+% \gls{dnn} generates different representation at each layer
+% specific layers react or activate for specific features
+% Intution of learning different things in each layer
+% highlighting different parts of input, ephasizing
+
+% earlier layers output representations that make later task easier e.g. classification
+% -> example XOR linear separability -> hidden layer maps into a different feature space
+
+%often better than hand selected features
+% during supervised training rich representations are learned
+% reusablility of parts of network
+
+% whole field of research dedicated to finding general purpose representation
+
+\glspl{dnn}
+
+
+
+% - representation learning
+
+%\enquote{respresentation learning} -> not only mapping but also learning features
 %
 %factors of variation make learning difficult (e.g. recognizing a car in an image -> different angles)
 %
 %each mathematical function outputs new representation of input
-%
-%deep learning: models that involve \enquote{greater amount of composition of learned functions}
 %
 %more available data -> Deep Learning more useful
 %overfitting no issue
@@ -350,21 +372,26 @@ A typical way of visualizing a \gls{mlp} can be seen in TODO.
 %possible with 9 neurons that each learn to identify one combination
 %better: 3 neurons describe color and 3 the type of object (concatenation? intermediate representation)
 %
-%1980: back-propagation
 %1990s: advances in Sequence modeling -> LSTM
 %
-%over time: more data examples, bigger model size (driven by greater computational resources)
-%
-%% TODO: coole Abbildung auf Seite 25
-%
+
+\subsubsection{Training Neural Networks}
+Neural networks are usually trained by applying some form of gradient descent.
+
+- Backpropagation
+% Training dificult: inductive biases
+% \enquote{incorporate doamin knowledge into the network} -> cnn, parameter sharing -> reduce trainable parameters while having equal size
+
+% modern models designed  to have nice properties for optimization (LSTM) (seite 341)
+% skip connection
+% cnn: sprase interaction
+% less calculations
 
 %from~\autocite{sonnet2022NeuralBoook}:
-%perceptron -> multiple layers motivated by XOR problem
 %The term \enquote{Deep Learning} was first used in book in 2000
-%examples for uses: optical character recognition, \enquote{AlphaGo} beating the best Go Player in the world, biology
-%
 
-\subsubsection{Backpropagation}
+% MLPs have not been widely used in pratice: goodfellow and bias paper
+
 
 \subsubsection{Loss Functions / Example Classification}
 
