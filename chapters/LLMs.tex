@@ -332,36 +332,23 @@ The raw input data was processed, so only information relevant to the task remai
 This is known as \textit{Feature Engineering}.
 Depending on the complexity of the task and data, a lot of manual effort is needed to find effective features.
 Having the model learn the features automatically is called \enquote{feature learning} or \enquote{representation learning}.
-The concept of \textit{representations} is crucial in deep learning.
+
+The concept of \textit{representations} is crucial to deep learning.
+\glspl{mlp} generate a new representation of the input at each layer.
+During supervised training, earlier layers learn to output representations that make the target task easier.
+Looking back at the XOR-function (\autoref{fig:xor}), the input data is initially not linear separable which changes after it is passed through the first layer.
+The hidden layer maps the inputs into a different feature space, where the classification task is easier.
+
+An intuition for \glspl{dnn} is that specific layers learn different concepts, i.e.\ they output representations that carry information about that concept.
+This motivates the reuse of certain parts of the network which is known as \enquote{transfer learning}.
+Building networks that can find expressive, general purpose representations for input data has been a central object of research.
+In the domain of language, representations for words (i.e.\ embeddings) are especially important as inputs in natural language initially do not lie in a vector space~\autocite{Goodfellow-et-al-2016}.
+\glspl{dnn} have been successfully used to create powerful word representations that generalize well for many different tasks~\autocite{zhao2023survey}.
+% TODO: connection to language model introduction
 
 %often better than hand selected features
 
-% \gls{dnn} generates different representation at each layer
-% specific layers react or activate for specific features
-% Intution of learning different things in each layer
-% highlighting different parts of input, ephasizing
-
-% earlier layers output representations that make later task easier e.g. classification
-% -> example XOR linear separability -> hidden layer maps into a different feature space
-
-%often better than hand selected features
-% during supervised training rich representations are learned
-% reusablility of parts of network
-
-% whole field of research dedicated to finding general purpose representation
-
-\glspl{dnn}
-
-
-
-% - representation learning
-
-%\enquote{respresentation learning} -> not only mapping but also learning features
-%
 %factors of variation make learning difficult (e.g. recognizing a car in an image -> different angles)
-%
-%each mathematical function outputs new representation of input
-%
 %more available data -> Deep Learning more useful
 %overfitting no issue
 
@@ -371,14 +358,13 @@ The concept of \textit{representations} is crucial in deep learning.
 %3 subjects, 3 colors -> model should recognize all 9 combinations
 %possible with 9 neurons that each learn to identify one combination
 %better: 3 neurons describe color and 3 the type of object (concatenation? intermediate representation)
-%
-%1990s: advances in Sequence modeling -> LSTM
-%
 
-\subsubsection{Training Neural Networks}
+\subsubsection{Training for Neural Networks}
 Neural networks are usually trained by applying some form of gradient descent.
+Hence, the hypothesis function that is included in the loss needs to be differentiable.
+Determining and evaluating the gradient for neural networks can be challenging and computational expensive as the networks may be composed of hundreds of layers and millions of parameters.
 
-- Backpropagation
+%- Backpropagation
 % Training dificult: inductive biases
 % \enquote{incorporate doamin knowledge into the network} -> cnn, parameter sharing -> reduce trainable parameters while having equal size
 
