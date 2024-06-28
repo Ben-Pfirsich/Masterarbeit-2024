@@ -190,7 +190,7 @@ Hence, taking small steps in the direction of the negative gradient should event
 This motivates the iterative method called \enquote{gradient descent} or \enquote{steepest descent}.
 After randomly initializing $\boldsymbol{\theta_0}$ (preferably close to zero) the following update is iteratively calculated:
 \[
-    \boldsymbol{\theta_{i+1}} = \boldsymbol{\theta_{i}} + \epsilon\,[\nabla\mathcal{L}](\boldsymbol{\theta_{i}})
+    \boldsymbol{\theta_{t+1}} = \boldsymbol{\theta_{t}} + \epsilon\,[\nabla\mathcal{L}](\boldsymbol{\theta_{t}})
 \]
 The variable $\epsilon$ is called the \textit{learning rate}.
 It controls the magnitude of each update and is usually chosen to be a real number close to zero (e.g.\ 0.01). % TODO: source
@@ -292,7 +292,7 @@ The function $f^{(1)}$ and $f^{(2)}$ can be combined into a single function $f^{
 The non-linear function $g$ is applied component wise.
 The complete network can now be written as a simple composition of functions:
 \[
-f(\boldsymbol{x}) = f^{(3)}(f^{\{1, 2\}}(\boldsymbol{x}))
+    f(\boldsymbol{x}) = f^{(3)}(f^{\{1, 2\}}(\boldsymbol{x}))
 \]
 $f^{(1)}$, $f^{(2)}$ and $f^{(3)}$ are called the \enquote{neurons} of the network.
 Multiple neurons that can be computed in parallel are called a layer.
@@ -364,7 +364,82 @@ Neural networks are usually trained by applying some form of gradient descent.
 Hence, the hypothesis function that is included in the loss needs to be differentiable.
 Determining and evaluating the gradient for neural networks can be challenging and computational expensive as the networks may be composed of hundreds of layers and millions of parameters.
 
-%- Backpropagation
+In order to update the parameter vector $\boldsymbol{\theta_t}$ in a single step of the optimization procedure, the gradients of the point-wise loss functions need to be evaluated in  $\boldsymbol{\theta_t}$:
+\[
+    [\nabla_{\boldsymbol{\theta}}  L(h(x_i, \boldsymbol{\theta}), y_i)](\boldsymbol{\theta_t})
+\]
+Input examples $x_i$, target values $y_i$ and predictions $\hat{y}_i = h(x_i, \boldsymbol{\theta})$ are fixed values.
+If the hypothesis function $h$ is a \gls{mlp} with $l$ layers, the loss function is simply a composition of many functions.
+\[
+    \nabla_{\boldsymbol{W}, \boldsymbol{b}} \, L(g^{(l)}(\cdots g^{(2)}(W^{(2)}g^{(1)}(W^{(1)}x_i + b^{(1)}) + b^{(2)}) \cdots + b^{(l)}), y_i)
+\]
+Taking derivatives with regard to the learnable parameters $\boldsymbol{W, b}$ can be accomplished by applying the \textit{chain rule of calculus}.
+Let $y = g(x)$ and $z = f(g(x)) = f(y)$.
+The derivative of the composed function can be written as
+\[
+    \frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}
+\]
+Considering a simple \gls{mlp} similar to the one used in the XOR-problem, the intermediate steps in the \textit{forward computation} can be denoted as follows.
+\[
+    h(\boldsymbol{x}; \boldsymbol{W}, \boldsymbol{b}) =
+    \overbrace{
+        g^{(2)}\Biggl(
+        \underbrace{
+            \begin{pmatrix}
+                w_{1}^{(2)} \\
+                w_{2}^{(2)}
+            \end{pmatrix}^{\top}
+            \overbrace{
+                g^{(1)} \Biggl(
+                \underbrace{
+                    \begin{pmatrix}
+                        w_{11}^{(1)} & w_{12}^{(1)} \\
+                        w_{21}^{(1)} & w_{22}^{(1)}
+                    \end{pmatrix}
+                    \begin{pmatrix}
+                        x_1 \\
+                        x_2
+                    \end{pmatrix}
+                    +
+                    \begin{pmatrix}
+                        b_1^{(1)} \\
+                        b_2^{(1)}
+                    \end{pmatrix}
+                }_{z^{(1)}}
+                \Biggr)
+            }^{o^{(1)}}
+            +
+            \begin{pmatrix}
+                b_1^{(2)} \\
+                b_2^{(2)}
+            \end{pmatrix}
+        }_{z^{(2)}}
+        \Biggr)
+    }^{o^{(2)}}
+\]
+The partial derivative for a single weight of the last layer can be written as
+\begin{align*}
+    \frac{\partial L}{\partial w_1^{(2)}} &= \frac{\partial L}{\partial o^{(2)}} \frac{\partial o^{(2)}}{\partial z^{(2)}}  \frac{\partial z^{(2)}}{\partial w_1^{(2)}} \\
+    &= \frac{\partial L}{\partial o^{(2)}} g^{(2)\prime} (z^{(2)}) o_1^{(1)}
+\end{align*}
+where $g^{(2)\prime}$ is the second derivative of the last activation function.
+If the \textit{least squares loss} $L_{sq} (\hat{y}_i)= \frac{1}{2}(y_i - \hat{y}_i)^2$ with derivative $L_{sq}^{\prime} (\hat{y}_i) = (y_i - \hat{y}_i)$ is chosen, the term simplifies to
+\begin{align*}
+    \frac{\partial L}{\partial w_1^{(2)}} &= L_{sq}^{\prime} (o^{(2)}) g^{(2)\prime} (z^{(2)}) o_1^{(1)} \\
+    &= (y_i - o^{(2)}) g^{(2)\prime} (z^{(2)}) o_1^{(1)}
+\end{align*}
+More generally, when regarding the neural network as a graph like in \autoref{fig:neural-network}, the partial derivative for a single weight can be calculated by forming it along the path from the last layer (respectively the loss function) to the edge that represents that weight.
+For weights that are located further inside the network, multiple paths exist, which translates into multiple added terms that form the derivative.
+Moreover, derivatives of later layers include terms that are needed to calculate derivatives of weights in the earlier layers.
+This motivates the \textit{back-propagation} method that determines the gradient by recursively calculating the layer-wise derivatives from the back to the front of the network.
+Before that, a forward propagation (i.e.\ calculating the loss for a training example) is necessary to gather the inputs and outputs of the activation functions that as seen above may appear in the partial derivatives.
+Back-propagation avoids duplicate calculations by saving subexpression in memory, which reduces computational cost.
+
+% not only for MLP but other neural networks
+%\href{https://sudeepraja.github.io/Neural/}{A Derivation of Backpropagation in Matrix Form | Sudeep Raja}
+
+% not analytical form of gradient is needed, but gradient evalutated in current parameter vector \theta
+
 % Training dificult: inductive biases
 % \enquote{incorporate doamin knowledge into the network} -> cnn, parameter sharing -> reduce trainable parameters while having equal size
 
@@ -378,8 +453,7 @@ Determining and evaluating the gradient for neural networks can be challenging a
 
 % MLPs have not been widely used in pratice: goodfellow and bias paper
 
-
-\subsubsection{Loss Functions / Example Classification}
+%\subsubsection{Loss Functions / Example Classification}
 
 
 \section{Transformers}\label{sec:trans}
