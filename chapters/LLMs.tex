@@ -435,30 +435,48 @@ This motivates the \textit{back-propagation} method that determines the gradient
 Before that, a forward propagation (i.e.\ calculating the loss for a training example) is necessary to gather the inputs and outputs of the activation functions that as seen above may appear in the partial derivatives.
 Back-propagation avoids duplicate calculations by saving subexpression in memory, which reduces computational cost.
 
-% not only for MLP but other neural networks
-%\href{https://sudeepraja.github.io/Neural/}{A Derivation of Backpropagation in Matrix Form | Sudeep Raja}
+\subsubsection{Motivation for different Architectures}
+The optimization of neural networks can be extremely difficult, as the objective functions are non-convex.
+While the universal approximation theorem states that a complex enough \gls{mlp} can learn a vast number of target functions, this does not guarantee that the learning algorithm will find a sufficient solution.
+Pure \glspl{mlp} have rarely been used in practice, possibly because during the development of their theory, computational power and data availability were very limited.
 
-% not analytical form of gradient is needed, but gradient evalutated in current parameter vector \theta
+Instead, more specialized neural networks emerged that incorporate domain knowledge into their architecture~\autocite{Goodfellow-et-al-2016}.
+These network architectures include stronger \textit{inductive biases} in their designs.
+Inductive biases enable the learning algorithm to prefer some solutions over others by making assumption about the data-generating distribution.
+\glspl{cnn} for example, are a successful neural network architecture that excels at processing images.
+They incorporate the inductive bias of \textit{locality} i.e.\ that features (in this context pixels) that are in close proximity in the input space are stronger related than those that are distant from each other.
+Inductive biases make neural networks less general and flexible but act as a kind of regularization that improves optimization~\autocite{battaglia2018relationalinductivebiasesdeep}.
+Some theoretic works even argue that good generalization can only be archived through adequate inductive biases, not only with better datasets and more compute power~\autocite{goyal2022inductive}.
 
-% Training dificult: inductive biases
-% \enquote{incorporate doamin knowledge into the network} -> cnn, parameter sharing -> reduce trainable parameters while having equal size
-
-% modern models designed  to have nice properties for optimization (LSTM) (seite 341)
-% skip connection
-% cnn: sprase interaction
-% less calculations
-
-%from~\autocite{sonnet2022NeuralBoook}:
-%The term \enquote{Deep Learning} was first used in book in 2000
-
-% MLPs have not been widely used in pratice: goodfellow and bias paper
+These newer architectures are specifically designed to have nicer properties for optimization, like shared parameters and sparse interactions to reduce the number of trainable parameters and calculations.
+Altogether, they are still neural networks composed of different layers or building blocks similar to \glspl{mlp}.
+Thus, gradient descent and backpropagation can be applied for optimization~\autocite{Goodfellow-et-al-2016}.
 
 %\subsubsection{Loss Functions / Example Classification}
 
+% not analytical form of gradient is needed, but gradient evalutated in current parameter vector \theta
+%\href{https://sudeepraja.github.io/Neural/}{A Derivation of Backpropagation in Matrix Form | Sudeep Raja}
 
+%from~\autocite{sonnet2022NeuralBoook}:
+%The term \enquote{Deep Learning} was first used in book in 2000
 \section{Transformers}\label{sec:trans}
 
+% Tokenization
 
+% Embeddings
+
+% Positional encodings
+
+% attention mechanism
+
+% self-superivsed pre training
+
+% prediction of words (language modeling)
+
+
+%attention mechanism: long-range dependencies
+%dynamic connections between blocks, instead of fixed ones like in traditional setting
+%~\autocite{goyal2022inductive}
 \section{Decoder-only Models}\label{sec:decoder}
 
 \subsection{GPT}\label{subsec:gpt}
