@@ -518,7 +518,7 @@ and tokenizing it with a subword tokenizer might yield the following output
 \colorbox{goodgreen!15}{
     \centering
     \begin{minipage}{0.9\textwidth}
-    ['<s>', 'token', '##izing', 'text', 'is', 'a', 'core', 'task', 'of', 'nl','##p', '.', '<\backslash s>']
+    ['<s>', 'token', '\#\#izing', 'text', 'is', 'a', 'core', 'task', 'of', 'nl','\#\#p', '.', '<\backslash s>']
     \end{minipage}
 }
 \end{center}
@@ -526,23 +526,28 @@ that is represented by a list of integer values
 \begin{center}
     \colorbox{goodgreen!15}{
         \centering
-        \begin{minipage}{0.9\textwidth}
+        \begin{minipage}{\textwidth}
         [101, 19204, 6026, 3793, 2003, 1037, 4563, 4708, 1997, 17953, 2361, 1012, 102]
         \end{minipage}
     }
 \end{center}
+As seen in the example above, special tokens like \enquote{<s>} can be defined that carry a specific meaning.
+In this case, they signify the beginning and end of the text sequence.
 
-blibla
-% very complex rule sets for tokenization -> learned functions
+Earlier tokenizers were very simple rule-based programs.
+The \textit{whitespace tokenizer} for example, splits the input string at each whitespace.
+Modern subword tokenizer can have complex rule sets that are often learned from a training corpus.
+Furthermore, they have sophisticated methods to deal with unknown tokens, e.g.\ Byte-Pair Encoding (BPE).
 
-% special tokens
+Summing up, text sequences are converted to a vector of token IDs before they are processed by the neural network.
+As seen in \autoref{subsec:dnn}, the input dimension of a neural network like the \gls{mlp} (and as later seen transformers) is fixed.
+Because of that, \glspl{nlm} will usually have a maximal token input size.
+Typical values for that are 512, 1,024, 2,048, or 4,096 tokens.
+Sequences that are shorter than the maximal sequence length need to be padded to fit exactly into the input layer.
+For that, a special padding token exists that can be interpreted by the model.
+Of course a \glspl{nlm} that was trained on tokenized inputs will always need that same tokenizer to make predictions.
 
-% padding
-
-% model trained with a specific tokenizer always needs it!
-
-% sophisticated techiniques
-
+% Vocab size!
 % Docoding the output -> Create a text
 
 %page 50, p 125
