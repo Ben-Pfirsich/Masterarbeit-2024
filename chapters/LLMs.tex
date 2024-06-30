@@ -123,7 +123,7 @@ In the setting of supervised learning, available training data consists of pairs
 The general aim is to model the relation between the examples $x_i$ and the targets $y_i$.
 For that, assumptions about the origin of the data have to be made.
 It is commonly assumed that the pairs $(x_i, y_i)$ are sampled from an unknown probability distribution, i.e.\ they are realizations of random variables $Z_i = (X_i, Y_i)$ that take values in $\mathcal{X} \times \mathcal{Y}$.
-The random variables $\{(X_1, Y_1), \dots ,(X_m, Y_m)\}$ are independently and identically distributed (i.i.d.) while $X_i$ and $Y_i$ are not necessarily independent~\autocite{gressmann2019probabilistic}.
+The random variables $\{(X_1, Y_1), \dots ,(X_m, Y_m)\}$ are independently and identically distributed (i.i.d.) while their components $X_i$ and $Y_i$ are not necessarily independent~\autocite{gressmann2019probabilistic}.
 In the context of \gls{ml} this is often denoted as $(X_i,Y_i) \sim P(X, Y)$ where $P(X, Y)$ signifies the joint probability distribution (e.g.\ \textcite{Goodfellow-et-al-2016}).
 
 In the setting of \enquote{classical} supervised learning, the objective is to learn a deterministic prediction function $f: \mathcal{X} \rightarrow \mathcal{Y}$ that defines a mapping between examples and targets:
@@ -452,6 +452,7 @@ These newer architectures are specifically designed to have nicer properties for
 Altogether, they are still neural networks composed of different layers or building blocks similar to \glspl{mlp}.
 Thus, gradient descent and backpropagation can be applied for optimization~\autocite{Goodfellow-et-al-2016}.
 
+Since the introduction of the \textit{transformer} architecture by \textcite{vaswani2023attention} the field of \acrlong{lm} has dominated by transformer based \glspl{nlm}~\autocite{cazenavette2021bias}.
 %\subsubsection{Loss Functions / Example Classification}
 
 % not analytical form of gradient is needed, but gradient evalutated in current parameter vector \theta
@@ -459,9 +460,104 @@ Thus, gradient descent and backpropagation can be applied for optimization~\auto
 
 %from~\autocite{sonnet2022NeuralBoook}:
 %The term \enquote{Deep Learning} was first used in book in 2000
-\section{Transformers}\label{sec:trans}
 
-% Tokenization
+
+\section{Language Modeling as a Supervised Learning Problem}\label{sec:trans}
+
+Looking back at the initial language modeling problem, it can now be formulated as a supervised learning scenario.
+The goal is to find a conditional probability distribution over all possible words given the sequence of the previously occurring words
+\[
+    P(w_u | w_1, \dots , w_{u-1})
+\]
+As seen in \autoref{subsec:supervised-learning}, a conditional distribution can be modeled with a prediction function $f: \mathcal{X} \rightarrow \operatorname{Distr}(\mathcal{Y})$.
+In the setting of language modeling, the input space $\mathcal{X}$ consists of sequences of words while the output space $\operatorname{Distr}(\mathcal{Y})$ is a discrete distribution over all possible words that could follow.
+To complete the formulation of this supervised learning problem, further needed are a dataset $D$, an appropriate loss function $L: \operatorname{Distr}(\mathcal{Y}) \times \mathcal{Y} \rightarrow \mathbb{R}$ and a set of hypothesis functions $\mathcal{H}$.
+In the context of \acrlong{nlm}, the hypothesis space $\mathcal{H}$ consists of neural networks (e.g\ a \gls{mlp}) with free, trainable parameters.
+How input space, output space, loss function and the dataset look like exactly will be discussed in detail in the following sections.
+
+%\[
+%    P(t_1, \dots , t_r | s_1, \dots , s_u)
+%\]
+
+%very little theoretical understanding of advancing architectures ~\autocite{bachmann2023scaling}
+
+\subsection{The Input Space and Tokenization}\label{subsec:tokenization}
+Neural networks are mathematical functions that usually use numbers as inputs and outputs.
+For \gls{nlp} this adds the additional challenge of converting written text inputs into numbers and reversing that process to make model outputs interpretable.
+Programs that make this conversion happen are called \enquote{tokenizers}.
+Earlier, language models were described to model probabilities over word sequences, which is conceptually easy to understand but not entirely correct.
+More precisely, language models work on more general units of text known as \enquote{tokens}.
+Depending on the type of tokenizer tokens can be characters, words or words pieces.
+
+Tokenizers work by splitting the input string into smaller units i.e.\ tokens by applying some set of rules.
+In the process of \textit{numericalization}, each token then gets mapped to an integer value resulting in a vector of integer numbers representing the input text.
+This is usually implemented in the tokenizer through a fixed mapping that assigns each known token in the vocabulary $V$ a unique integer value.
+%That unique integer value is often represented as a \textit{one-hot vector}, a vector of shape $(1 \times |V|)$ where every entry is zero except a single one at the word's index that takes the value \enquote{one}.
+
+Having a vocabulary that holds every known token poses different challenges.
+On the one hand, the vocabulary should not be too large as this might require the neural network to have a huge number of parameters.
+On the other hand, if the vocabulary is too small, some tokens might not have a defined mapping and are thus marked as unknown with a special ID which results in the loss of information.
+
+Character level tokenizers only need a tiny number of tokens in their vocabulary (e.g.\ all letters in the alphabet), but such a fine-grained breakdown of the input text requires the neural network to firstly learn the concept of words, which can be avoided with other tokenizers.
+Tokenizers that work on words have the problem that minor differences in words like misspellings and conjugations will result in different integer values which leads to a very large vocabulary.
+Moreover, rare works might be entirely unknown to the tokenizer.
+Modern state-of-the-art models use \textit{subword tokenization} like \enquote{WordPiece}, which are a compromise between the aforementioned methods.
+Splitting words into smaller units helps to handle both misspellings and rare words.
+Taking the sentence
+
+\begin{center}
+\colorbox{goodgreen!15}{
+    \begin{minipage}{0.5\textwidth}
+        Tokenizing text is a core task of NLP.
+    \end{minipage}
+}
+\end{center}
+
+and tokenizing it with a subword tokenizer might yield the following output
+\begin{center}
+\colorbox{goodgreen!15}{
+    \centering
+    \begin{minipage}{0.9\textwidth}
+    ['<s>', 'token', '##izing', 'text', 'is', 'a', 'core', 'task', 'of', 'nl','##p', '.', '<\backslash s>']
+    \end{minipage}
+}
+\end{center}
+that is represented by a list of integer values
+\begin{center}
+    \colorbox{goodgreen!15}{
+        \centering
+        \begin{minipage}{0.9\textwidth}
+        [101, 19204, 6026, 3793, 2003, 1037, 4563, 4708, 1997, 17953, 2361, 1012, 102]
+        \end{minipage}
+    }
+\end{center}
+
+blibla
+% very complex rule sets for tokenization -> learned functions
+
+% special tokens
+
+% padding
+
+% model trained with a specific tokenizer always needs it!
+
+% sophisticated techiniques
+
+% Docoding the output -> Create a text
+
+%page 50, p 125
+
+\subsection{The Output Distribution and Cross-Entropy Loss}\label{subsec:the-output-distribution---cross-entropy-loss}
+%the complete vocabulary $V$ assigning a probability to each possible word.
+
+\subsection{The Training Data}\label{subsec:the-training-data}
+
+~\autocite{transformer2022}
+
+~\autocite{transformer2024}
+
+
+\section{The Transformer Architecture}\label{sec:the-transformer-architecture}
 
 % Embeddings
 
@@ -477,6 +573,8 @@ Thus, gradient descent and backpropagation can be applied for optimization~\auto
 %attention mechanism: long-range dependencies
 %dynamic connections between blocks, instead of fixed ones like in traditional setting
 %~\autocite{goyal2022inductive}
+
+
 \section{Decoder-only Models}\label{sec:decoder}
 
 \subsection{GPT}\label{subsec:gpt}
