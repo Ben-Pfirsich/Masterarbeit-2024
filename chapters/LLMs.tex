@@ -462,7 +462,7 @@ Since the introduction of the \textit{transformer} architecture by \textcite{vas
 %The term \enquote{Deep Learning} was first used in book in 2000
 
 
-\section{Language Modeling as a Supervised Learning Problem}\label{sec:trans}
+\section{Language Modeling as a Supervised Learning Problem}\label{sec:lm-as-supervised}
 
 Looking back at the initial language modeling problem, it can now be formulated as a supervised learning scenario.
 The goal is to find a conditional probability distribution over all possible words given the sequence of the previously occurring words
@@ -472,7 +472,7 @@ The goal is to find a conditional probability distribution over all possible wor
 As seen in \autoref{subsec:supervised-learning}, a conditional distribution can be modeled with a prediction function $f: \mathcal{X} \rightarrow \operatorname{Distr}(\mathcal{Y})$.
 In the setting of language modeling, the input space $\mathcal{X}$ consists of sequences of words while the output space $\operatorname{Distr}(\mathcal{Y})$ is a discrete distribution over all possible words that could follow.
 To complete the formulation of this supervised learning problem, further needed are a dataset $D$, an appropriate loss function $L: \operatorname{Distr}(\mathcal{Y}) \times \mathcal{Y} \rightarrow \mathbb{R}$ and a set of hypothesis functions $\mathcal{H}$.
-In the context of \acrlong{nlm}, the hypothesis space $\mathcal{H}$ consists of neural networks (e.g\ a \gls{mlp}) with free, trainable parameters.
+In the context of \acrlong{nlm}s, the hypothesis space $\mathcal{H}$ consists of neural networks (e.g\ a \gls{mlp}) with free, trainable parameters.
 How input space, output space, loss function and the dataset look like exactly will be discussed in detail in the following sections.
 
 %\[
@@ -482,14 +482,14 @@ How input space, output space, loss function and the dataset look like exactly w
 %very little theoretical understanding of advancing architectures ~\autocite{bachmann2023scaling}
 
 \subsection{The Input Space and Tokenization}\label{subsec:tokenization}
-Neural networks are mathematical functions that usually use numbers as inputs and outputs.
-For \gls{nlp} this adds the additional challenge of converting written text inputs into numbers and reversing that process to make model outputs interpretable.
+Neural networks are mathematical functions that will usually expect numbers as inputs.
+For \gls{nlp} this adds the additional challenge of converting written text into numerical vectors.
 Programs that make this conversion happen are called \enquote{tokenizers}.
 Earlier, language models were described to model probabilities over word sequences, which is conceptually easy to understand but not entirely correct.
 More precisely, language models work on more general units of text known as \enquote{tokens}.
 Depending on the type of tokenizer tokens can be characters, words or words pieces.
 
-Tokenizers work by splitting the input string into smaller units i.e.\ tokens by applying some set of rules.
+Tokenizers work by splitting the raw input string into smaller units i.e.\ tokens by applying some set of rules.
 In the process of \textit{numericalization}, each token then gets mapped to an integer value resulting in a vector of integer numbers representing the input text.
 This is usually implemented in the tokenizer through a fixed mapping that assigns each known token in the vocabulary $V$ a unique integer value.
 %That unique integer value is often represented as a \textit{one-hot vector}, a vector of shape $(1 \times |V|)$ where every entry is zero except a single one at the word's index that takes the value \enquote{one}.
@@ -504,7 +504,6 @@ Moreover, rare works might be entirely unknown to the tokenizer.
 Modern state-of-the-art models use \textit{subword tokenization} like \enquote{WordPiece}, which are a compromise between the aforementioned methods.
 Splitting words into smaller units helps to handle both misspellings and rare words.
 Taking the sentence
-
 \begin{center}
 \colorbox{goodgreen!15}{
     \begin{minipage}{0.5\textwidth}
@@ -512,27 +511,20 @@ Taking the sentence
     \end{minipage}
 }
 \end{center}
-
 and tokenizing it with a subword tokenizer might yield the following output
 \begin{center}
 \colorbox{goodgreen!15}{
     \centering
-    \begin{minipage}{0.9\textwidth}
-    ['<s>', 'token', '\#\#izing', 'text', 'is', 'a', 'core', 'task', 'of', 'nl','\#\#p', '.', '<\backslash s>']
+    \begin{minipage}{\textwidth}
+    ['<s>', 'token', '\#\#izing', 'text', 'is', 'a', 'core', 'task', 'of', 'nl','\#\#p', '.', '<\backslash s>'] \newline
+    [101, 19204, 6026, 3793, 2003, 1037, 4563, 4708, 1997, 17953, 2361, 1012, 102]
     \end{minipage}
 }
 \end{center}
-that is represented by a list of integer values
-\begin{center}
-    \colorbox{goodgreen!15}{
-        \centering
-        \begin{minipage}{\textwidth}
-        [101, 19204, 6026, 3793, 2003, 1037, 4563, 4708, 1997, 17953, 2361, 1012, 102]
-        \end{minipage}
-    }
-\end{center}
-As seen in the example above, special tokens like \enquote{<s>} can be defined that carry a specific meaning.
+In the second list, each token is represented by an integer value.
+As seen above, special tokens like \enquote{<s>} can be defined that carry a specific meaning.
 In this case, they signify the beginning and end of the text sequence.
+Typically, vocabularies of tokenizers consist of 20k-200k unique tokens.
 
 Earlier tokenizers were very simple rule-based programs.
 The \textit{whitespace tokenizer} for example, splits the input string at each whitespace.
@@ -545,22 +537,64 @@ Because of that, \glspl{nlm} will usually have a maximal token input size.
 Typical values for that are 512, 1,024, 2,048, or 4,096 tokens.
 Sequences that are shorter than the maximal sequence length need to be padded to fit exactly into the input layer.
 For that, a special padding token exists that can be interpreted by the model.
-Of course a \glspl{nlm} that was trained on tokenized inputs will always need that same tokenizer to make predictions.
+Of course a \gls{nlm} that was trained on tokenized inputs will always need that same tokenizer to make predictions~\autocite{transformer2022}.
 
-% Vocab size!
 % Docoding the output -> Create a text
-
 %page 50, p 125
-
 \subsection{The Output Distribution and Cross-Entropy Loss}\label{subsec:the-output-distribution---cross-entropy-loss}
-%the complete vocabulary $V$ assigning a probability to each possible word.
+
+
+The prediction function is supposed to model a conditional probability distribution over the target space $\mathcal{Y}$.
+
+
+In this case, the target space is the vocabulary of tokens $V$, meaning the neural network has to output a distribution over the whole vocabulary.
+Taking neural networks with $|V|$ output neurons
+
+Given a sequence of tokens $\boldsymbol{x} \in \mathcal{X}$, this probability distribution is
+
+As the prediction function will be modeled by a neural network,
+
+% outut a probability distribution
+% next token preidction -> how likely is each token to appear
+% distribtuion over all possible tokens in the vocabulary $V$
+% prediction function has to output discrete distribution over tokens
+% as prediction function is estimated by neural network -> neural network with |V| output neurons
+% single neuron represents degree of beflief for the occurance of a specific token
+% output \textit{logits} not really interpretable as distributions
+
+%Under the condition of an inputs sequence of words $x$ the di
+
+\[
+    \operatorname{softmax}(\boldsymbol{z})_i = \frac{\exp (z_i)}{\sum_j \exp(z_j)}
+\]
+
+\[
+    D_{KL} (P||Q) = \mathbb{E}_{x \sim P}[\log \frac{P(x)}{Q(x)}]
+\]
+\[
+    D_{KL} (P||Q) = \sum_{x \in \mathcal{X}} p(x) \log(\frac{p(x)}{q(x)})
+\]~\autocite{transformer2022}
+
+
+Cross-entropy:
+\[
+    H(P, Q) = - \mathbb{E}_{x \sim P} [\log Q(x)]
+\]
+
+cross entropy discrete
+\[
+    L = - \sum_i p_i \log q_I
+\]
+
+% cross-entropy -> principle of maximum likelihood
 
 \subsection{The Training Data}\label{subsec:the-training-data}
-
+how is gpt trained: page 152
 ~\autocite{transformer2022}
 
 ~\autocite{transformer2024}
 
+%autoregressive
 
 \section{The Transformer Architecture}\label{sec:the-transformer-architecture}
 
